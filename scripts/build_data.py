@@ -18,7 +18,12 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "data" / "molecules.yaml"
+SRC = ROOT / "data" / "molecules.yaml"  # hand-written
+GENERATED = ROOT / "data" / "molecules.generated.yaml"  # from scripts/make_molecules.py
+
+
+def load_molecules() -> list[dict]:
+    return yaml.safe_load(SRC.read_text()) + (yaml.safe_load(GENERATED.read_text()) if GENERATED.exists() else [])
 GROUPS = ROOT / "data" / "groups.json"
 PLAYLISTS = ROOT / "data" / "playlists.yaml"
 OUT = ROOT / "public" / "molecules.json"
@@ -128,8 +133,12 @@ def locant_sites(frag, mol, labels) -> list[str]:
     atoms = set(frag["atoms"])
     num = numeric(labels)
     if frag["role"] == "ending":
+        def bond_locant(i, j):  # k for the bond k/k+1; n for a ring's closing bond n/1
+            lo, hi = sorted((num[i], num[j]))
+            return lo if hi - lo == 1 else hi
+
         return label_sort(
-            str(min(num[b.GetBeginAtomIdx()], num[b.GetEndAtomIdx()]))
+            str(bond_locant(b.GetBeginAtomIdx(), b.GetEndAtomIdx()))
             for b in mol.GetBonds()
             if b.GetBondTypeAsDouble() > 1
             and {b.GetBeginAtomIdx(), b.GetEndAtomIdx()} <= atoms & num.keys()
@@ -280,6 +289,44 @@ def renumberings(num, mol, pinned) -> list[dict[int, int]]:
     return [{by_num[k]: f(k) for k in by_num} for f in maps]
 
 
+def is_ring_walk(num, mol) -> bool:
+    """Numbers 1..n go once round a single ring (true for pyridine, not purine)."""
+    n = len(num)
+    by_num = {v: a for a, v in num.items()}
+    return n > 2 and all(mol.GetBondBetweenAtoms(by_num[k], by_num[k % n + 1]) is not None for k in range(1, n + 1))
+
+
+def check_longest_chain(m, mol) -> list[str]:
+    """Open-chain parents: no longer carbon chain may run through the atoms the
+    suffix sits on. (OPSIN accepts '2-ethylpropan-1-ol'; this does not.)"""
+    parent = numeric(frames(m)[0])
+    ring = mol.GetRingInfo()
+    if is_fixed(m) or not parent or any(ring.NumAtomRings(a) for a in parent):
+        return []
+    must = set()
+    for _, f in owning(m["fragments"]):
+        if f["role"] == "suffix":
+            must |= {a for a in f["atoms"] if a in parent} or {
+                n.GetIdx() for a in f["atoms"] for n in mol.GetAtomWithIdx(a).GetNeighbors() if n.GetIdx() in parent
+            }
+    carbons = {a.GetIdx() for a in mol.GetAtoms() if a.GetSymbol() == "C" and not ring.NumAtomRings(a.GetIdx())}
+    best = []
+
+    def walk(path):
+        nonlocal best
+        if must <= set(path) and len(path) > len(best):
+            best = list(path)
+        for n in mol.GetAtomWithIdx(path[-1]).GetNeighbors():
+            if n.GetIdx() in carbons and n.GetIdx() not in path:
+                walk(path + [n.GetIdx()])
+
+    for start in carbons:
+        walk([start])
+    if len(best) > len(parent):
+        return [f"parent chain has {len(parent)} carbons but a chain of {len(best)} runs through the same suffix atoms: {best}"]
+    return []
+
+
 def check_lowest_locants(m, mol) -> list[str]:
     """OPSIN accepts non-preferred numbering ('butan-3-ol'), so check it here:
     no other numbering of the same chain/ring may give lower locants. Compared in
@@ -290,8 +337,9 @@ def check_lowest_locants(m, mol) -> list[str]:
     owner = {a: f for _, f in owning(m["fragments"]) for a in f["atoms"]}
     for fi, fr in enumerate(frs):
         num = numeric(fr)
-        if len(num) < 2 or (fi == 0 and is_fixed(m)):
-            continue
+        fixed = fi == 0 and is_fixed(m)
+        if len(num) < 2 or (fixed and not is_ring_walk(num, mol)):
+            continue  # fused retained numbering (purine) is trusted data
         tag = "parent numbering" if fi == 0 else f"frame {fi}"
         if fi > 0:
             attach = {
@@ -312,7 +360,12 @@ def check_lowest_locants(m, mol) -> list[str]:
                     sites[f["role"]] += [int(v) for v in locant_sites(f, mol, {a: str(v) for a, v in lab.items()})]
             return tuple(sorted(v) for v in sites.values())
 
-        best = min(renumberings(num, mol, pinned=fi > 0), key=key)
+        alts = renumberings(num, mol, pinned=fi > 0)
+        if fixed:  # heterocycle: only numberings that keep every heteroatom's number
+            by_num = {v: a for a, v in num.items()}
+            sym = lambda a: mol.GetAtomWithIdx(a).GetSymbol()
+            alts = [alt for alt in alts if all(sym(a) == sym(by_num[k]) for a, k in alt.items())]
+        best = min(alts, key=key)
         if key(best) < key(num):
             errs.append(f"{tag} is not lowest-locant: got {key(num)}, but {key(best)} is possible (suffix, ene/yne, substituents)")
     return errs
@@ -353,7 +406,7 @@ def validate(m, groups, opsin_smiles):
     if not own:  # these need sane atom indices
         errs += check_elements(m, mol, groups)
         loc = check_locants(m, mol)
-        errs += loc or check_lowest_locants(m, mol)
+        errs += loc or (check_lowest_locants(m, mol) + check_longest_chain(m, mol))
     errs += check_stereo(mol)
     errs += check_opsin(m, mol, opsin_smiles)
     return errs, mol
@@ -523,7 +576,7 @@ def check_playlists(playlists, mol_ids) -> list[str]:
 
 def main() -> int:
     groups = load_groups()
-    mols = yaml.safe_load(SRC.read_text())
+    mols = load_molecules()
     playlists = yaml.safe_load(PLAYLISTS.read_text())
     failed = [f"duplicate id '{i}'" for i, c in Counter(m.get("id") for m in mols).items() if c > 1]
     failed += check_playlists(playlists, [m.get("id") for m in mols])

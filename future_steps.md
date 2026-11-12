@@ -24,7 +24,28 @@
    keyboard on the game. Dropdowns are now exempt, and a focused form control
    keeps its own keys (arrows, Enter, Esc).
 
+## Done (2026-11-12, third pass)
+
+- **Molecule generator** (`scripts/make_molecules.py`): one-line recipes for
+  chains, cycloalkanes, benzenes and monocyclic heterocycles. This is the
+  "real authoring helper" for those families. 127 new molecules, 164 total.
+- **Three new playlists**: Longer chains, more groups (53); Rings with groups
+  (42); Heterocycles (32). The first playlist is now called Beginner.
+- **New checks**: longest chain for open-chain parents; ring direction for
+  monocyclic heterocycles; ring-closing double-bond locants.
+- **Common name** moved above the typed name, larger.
+- **End-group motion**: methyls, hydroxyls and amino groups spin; small end
+  groups wag.
+- **GitHub**: repo, CI (unit + browser + data) and Pages deploy.
+
 ## Next
+
+- **Fused heterocycles** (indole, quinoline) need locants like `3a`/`8a`,
+  which the label format does not carry yet.
+- **Generator gaps**: nested substituents (parentheses), nitro/cyano/alkoxy
+  prefixes, nitriles, E/Z and R/S. It does not check suffix seniority.
+- **Bundle size**: molecule data is now a quarter of the download. Past a few
+  hundred molecules, load each playlist on demand.
 
 - **Authoring helper, real version.** `scripts/draft_molecule.py` only prints
   atom indices and checks OPSIN. Proposing fragment-to-atom assignments from

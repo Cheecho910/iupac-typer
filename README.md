@@ -4,8 +4,9 @@ Typing game for learning IUPAC names from 3D molecules. Each fragment of a name
 (locant, substituent, parent, suffix) has one color, and so do the atoms it
 stands for. You type the name; as each fragment completes, its atoms pulse.
 
-Three playlists, 37 molecules: Foundations, Medicine cabinet (aspirin,
-benzocaine, paracetamol, lidocaine) and Caffeine and cousins.
+Six playlists, 164 molecules: Beginner; Longer chains, more groups (to C9,
+two groups at a time); Rings with groups; Heterocycles; Medicine cabinet
+(aspirin, benzocaine, paracetamol, lidocaine); Caffeine and cousins.
 
 Full spec: `docs/SPEC.md`. What is done and what is next: `future_steps.md`.
 
@@ -87,7 +88,29 @@ Xanthines carry their hydro prefixes and indicated hydrogen:
 `1,3,7-trimethylpurine-2,6-dione`; OPSIN accepts both. If you prefer the short
 form, delete the `descriptor` fragment and edit `name`.
 
-## Add a molecule
+## Add a molecule (the fast way: a recipe)
+
+For substitutive names on chains (C1-C9), cycloalkanes, benzene and the
+monocyclic heterocycles listed in `HETERO`, add one line to
+`scripts/make_molecules.py`:
+
+```python
+M(C(7), "one", [4], prefixes=[("methyl", [2, 6])], common="diisobutyl ketone"),
+M(cyclo(6), "one", [1], ene=[2]),
+M(H("pyridine"), "carboxylic acid", [3], common="niacin"),
+```
+
+then `python scripts/make_molecules.py && python scripts/build_data.py`. The
+generator builds the structure atom by atom, so it writes the name, SMILES,
+fragment ownership and chain numbers for you into
+`data/molecules.generated.yaml` (committed; do not edit by hand). You still
+choose the suffix and the locants; the build rejects wrong numbering, a
+non-longest chain, and anything with a stereocentre or E/Z bond. Add the new
+id to a playlist.
+
+## Add a molecule (by hand)
+
+For anything the generator does not cover (nested substituents, fused rings).
 
 Append to `data/molecules.yaml` (format documented at the top of that file),
 then run the data build. Rules:
@@ -137,7 +160,10 @@ is full: prefer `"alias": "<group>"` (same color, own element rule, as
 ## Layout
 
 ```
-data/molecules.yaml, playlists.yaml, groups.json   source of truth
+data/molecules.yaml                hand-written molecules
+data/molecules.generated.yaml      written by scripts/make_molecules.py
+data/playlists.yaml, groups.json   playlists, color/element registry
+scripts/make_molecules.py          recipes -> generated YAML
 scripts/build_data.py              embed, orient, validate -> public/molecules.json
 scripts/draft_molecule.py          authoring aid: atom table + OPSIN check
 src/engine.js                      typing engine (pure)
@@ -165,10 +191,18 @@ Data
   data, tied to the name only through the locants the name cites. Hydro
   prefixes and indicated hydrogen (`descriptor`) are validated by OPSIN alone,
   and OPSIN cannot tell `3,7-dihydro-1H` from another valid distribution.
-- **Known validation gap: parent-chain choice.** OPSIN is permissive: it
-  confirms the name *denotes* the structure, not that it is the preferred
-  name. Wrong direction is caught (above); picking a non-longest chain
-  (`2-ethylpropane` for 2-methylbutane) is NOT. Review that by eye.
+- **Longest chain** is checked for open-chain parents: no longer carbon chain
+  may run through the suffix atoms (`2-ethylpropan-1-ol` fails).
+- **Monocyclic heterocycles** keep the heteroatom numbers fixed, but the
+  direction round the ring is checked (`5-methylpyridine` fails).
+- **Still not checked**: which group is senior enough to be the suffix, and
+  alphabetical order of prefixes. The generator sorts prefixes; seniority is
+  your choice in the recipe. OPSIN confirms a name *denotes* the structure,
+  not that it is the preferred one.
+- **`oxo`** owns only the O (the carbon stays with the parent); `one` owns C=O.
+- **Locants are dropped** only where the repo already did: one-carbon chains,
+  and a lone feature on ethane, a cycloalkane or benzene (`ethanol`,
+  `cyclohexanol`, `chlorobenzene`). Otherwise always written.
 - **Esters**: only the acid chain is numbered; the O-alkyl group is a
   `substituent` (alkyl) with no locants. The space is a `separator`.
 - **"an" belongs to the parent** (`propan`); `ene`/`yne` are `ending` fragments
@@ -210,6 +244,12 @@ Game
 - **Session row** is muted, not red: red is the error flash and sits next to
   the carbonyl color. One line to change: `--session` in `src/style.css`.
 - **Long names** shrink to fit one line (down to 14 px, then wrap).
+- **Common name** sits directly above the name you type.
+- **End-group motion**: every few seconds one end group moves. A group that is
+  one heavy atom plus hydrogens (CH3, OH, NH2) spins a full turn about its
+  bond; a group of up to three heavy atoms wags and settles. Ring bonds,
+  multiple bonds and C(=O)-N / C(=O)-O bonds never turn. Off in Settings and
+  under reduced-motion.
 - **Color preview** in Settings is the current molecule, live, beside the panel.
 - **Palette export/import** goes through a text box (plus Copy), because hosted
   sandboxes block file downloads.

@@ -4,7 +4,7 @@
 # reach level 2. Levels are per molecule and shared between playlists.
 
 - id: foundations
-  name: Foundations
+  name: Beginner
   description: Chains, one functional group at a time, then branches, acids and rings.
   molecules:
     - ethanol
@@ -31,6 +31,148 @@
     - phenol
     - cyclohexanol
     - cyclohexanone
+
+- id: chains
+  name: Longer chains, more groups
+  description: Up to nine carbons. Groups move off carbon 1, then come two at a time.
+  molecules:
+    - pentan-3-one
+    - pentan-3-ol
+    - hexan-1-ol
+    - hexan-1-amine
+    - heptanal
+    - heptan-4-ol
+    - octanoic-acid
+    - nonan-5-one
+    - nonan-1-ol
+    - 1-bromopentane
+    - hept-1-ene
+    - oct-1-yne
+    - 2-2-dimethylpropan-1-ol
+    - 2-2-dimethylpropanoic-acid
+    - 3-methylbutanal
+    - 3-3-dimethylbutan-2-one
+    - 2-methylbut-2-ene
+    - 4-methylpentan-2-one
+    - 3-ethylpentan-3-ol
+    - 5-methylhexan-2-one
+    - 2-6-dimethylheptan-4-one
+    - ethane-1-2-diol
+    - propane-1-3-diol
+    - propane-1-2-3-triol
+    - butane-1-4-diamine
+    - pentane-2-4-dione
+    - propanedioic-acid
+    - butanedioic-acid
+    - hexanedioic-acid
+    - hexa-1-5-diene
+    - 2-aminoethan-1-ol
+    - 2-aminoethanoic-acid
+    - 3-chloropropan-1-ol
+    - 3-hydroxypropanoic-acid
+    - 2-oxopropanoic-acid
+    - 4-hydroxybutan-2-one
+    - 3-oxobutanoic-acid
+    - 4-aminobutanoic-acid
+    - 5-hydroxypentanal
+    - 6-aminohexanoic-acid
+    - 7-hydroxyheptan-2-one
+    - prop-2-enal
+    - prop-2-enoic-acid
+    - 2-methylprop-2-enoic-acid
+    - but-3-enoic-acid
+    - pent-4-en-1-ol
+    - hex-5-en-2-one
+    - oct-7-yn-1-ol
+    - non-8-en-2-one
+    - ethyl-3-oxobutanoate
+    - methyl-4-hydroxybutanoate
+    - n-methylethanamide
+    - n-n-dimethylmethanamide
+
+- id: rings
+  name: Rings with groups
+  description: Cycloalkanes and benzenes carrying functional groups.
+  molecules:
+    - cyclopentanone
+    - cyclobutanone
+    - cycloheptanone
+    - cyclopentanol
+    - cyclohexanamine
+    - chlorocyclohexane
+    - methylcyclopentane
+    - cyclohexene
+    - cyclohexanecarboxylic-acid
+    - cyclopropanecarboxylic-acid
+    - cyclopentanecarbaldehyde
+    - 1-methylcyclohexan-1-ol
+    - 4-methylcyclohexan-1-one
+    - 4-4-dimethylcyclohexan-1-one
+    - cyclohex-2-en-1-one
+    - cyclopent-2-en-1-one
+    - 3-methylcyclopent-2-en-1-one
+    - cyclohexane-1-3-dione
+    - cyclohexane-1-4-dione
+    - cyclohexa-1-3-diene
+    - cyclohexa-1-4-diene
+    - 1-1-dimethylcyclohexane
+    - chlorobenzene
+    - ethylbenzene
+    - 1-2-dimethylbenzene
+    - 1-4-dimethylbenzene
+    - 1-3-5-trimethylbenzene
+    - 1-4-dichlorobenzene
+    - 4-methylphenol
+    - 4-chlorophenol
+    - benzene-1-2-diol
+    - benzene-1-4-diol
+    - benzaldehyde
+    - benzamide
+    - methyl-benzoate
+    - 4-methylbenzoic-acid
+    - 4-hydroxybenzaldehyde
+    - benzene-1-4-dicarboxylic-acid
+    - phenylmethanol
+    - 1-phenylethan-1-one
+    - 2-phenylethan-1-ol
+    - 2-phenylethan-1-amine
+
+- id: heterocycles
+  name: Heterocycles
+  description: Rings with N, O or S in them. The heteroatom is atom 1.
+  molecules:
+    - pyridine
+    - 3-methylpyridine
+    - 2-6-dimethylpyridine
+    - pyridin-2-amine
+    - pyridin-3-ol
+    - pyridine-4-carbaldehyde
+    - pyridine-3-carboxylic-acid
+    - pyridine-3-carboxamide
+    - pyrimidine
+    - pyrimidin-2-amine
+    - 1h-pyrrole
+    - 1h-imidazole
+    - 1-methyl-1h-imidazole
+    - furan
+    - 2-methylfuran
+    - furan-2-carbaldehyde
+    - thiophene
+    - thiophene-2-carboxylic-acid
+    - oxirane
+    - oxolane
+    - oxolan-2-one
+    - oxane
+    - 1-4-dioxane
+    - pyrrolidine
+    - pyrrolidin-2-one
+    - 1-methylpyrrolidin-2-one
+    - piperidine
+    - 1-methylpiperidine
+    - piperidin-4-one
+    - piperidin-4-ol
+    - morpholine
+    - 4-methylmorpholine
 
 - id: medicine-cabinet
   name: Medicine cabinet

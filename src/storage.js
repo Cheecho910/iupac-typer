@@ -13,6 +13,7 @@ export const defaults = () => ({
     locants: true,
     badges: true,
     style: 'ball', // ball | space | wire
+    wiggle: true, // end groups spin/wag now and then
     keyboard: true, // on-screen keyboard under the name
     playlist: 'foundations',
     ramp: true, // unlock a playlist's molecules in order

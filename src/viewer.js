@@ -8,6 +8,10 @@ const PULSE_MS = 480;
 const ROCK_DEG = 22; // gentle rock keeps the parent chain facing the camera
 const ROCK_PERIOD_MS = 9000;
 const IDLE_MS = 3500; // resume auto-rotate this long after the last interaction
+const WIGGLE_GAP_MS = [1400, 3600]; // pause between end-group motions (min, max)
+const SPIN_MS = 1100; // one full turn of a methyl / hydroxyl / amino group
+const WAG_MS = 1300; // a small end group swinging back and forth
+const WAG_DEG = 30;
 const DOUBLE_BOND = 0.7; // 3Dmol default 0.4: each line of a double bond, relative to a single bond
 const TRIPLE_BOND = 0.45; // default 0.25
 
@@ -19,7 +23,11 @@ export function createViewer(el, { background, neutral, text }) {
   let mol = null;
   let atoms = [];
   let colors = []; // per fragment hex (null -> neutral)
-  let opts = { style: 'ball', locants: true, badges: true };
+  let opts = { style: 'ball', locants: true, badges: true, wiggle: true };
+  let base = []; // resting coordinates [x, y, z] per atom
+  let rotors = []; // single bonds an end group can turn about
+  let motion = null; // { rotor, t0 }
+  let nextMotion = Infinity;
   let highlight = null; // fragment index or null
   const pulses = new Map(); // fragment -> start time
   let dirty = false;
@@ -82,6 +90,78 @@ export function createViewer(el, { background, neutral, text }) {
     dirty = false;
   }
 
+  // ---- end-group motion: single bonds rotate, and the picture should say so.
+  // A rotor is an acyclic single bond a-b whose b side is small: just b and its
+  // hydrogens (CH3, OH, NH2: spins a full turn) or up to 3 heavy atoms (wags).
+  // Bonds from a C=O carbon to N or O are left alone (amide/ester/acid: restricted).
+  function findRotors() {
+    const out = [];
+    const carbonyl = (c) => c.elem === 'C' && c.bonds.some((j, k) => c.bondOrder[k] === 2 && atoms[j].elem === 'O');
+    for (const b of atoms) {
+      if (b.elem === 'H') continue;
+      b.bonds.forEach((ai, k) => {
+        const a = atoms[ai];
+        if (a.elem === 'H' || b.bondOrder[k] !== 1) return;
+        if ((carbonyl(a) && 'NO'.includes(b.elem)) || (carbonyl(b) && 'NO'.includes(a.elem))) return;
+        const side = new Set([b.index]);
+        const queue = [b.index];
+        while (queue.length) {
+          for (const j of atoms[queue.pop()].bonds) {
+            if (j === a.index) continue;
+            if (!side.has(j)) (side.add(j), queue.push(j));
+          }
+        }
+        // ring bond: the b side loops back round to a through another neighbour
+        if ([...side].some((j) => j !== b.index && atoms[j].bonds.includes(a.index))) return;
+        const heavy = [...side].filter((j) => atoms[j].elem !== 'H').length;
+        const moving = [...side].filter((j) => j !== b.index);
+        if (!moving.length || heavy > 3 || side.size > atoms.length / 2) return;
+        out.push({ a: a.index, b: b.index, moving, spin: heavy === 1 });
+      });
+    }
+    return out;
+  }
+
+  function turn(rotor, angle) {
+    const [ax, ay, az] = base[rotor.a];
+    const [bx, by, bz] = base[rotor.b];
+    let ux = bx - ax, uy = by - ay, uz = bz - az;
+    const len = Math.hypot(ux, uy, uz) || 1;
+    (ux /= len), (uy /= len), (uz /= len);
+    const c = Math.cos(angle), s = Math.sin(angle);
+    for (const i of rotor.moving) {
+      const px = base[i][0] - bx, py = base[i][1] - by, pz = base[i][2] - bz;
+      const dot = ux * px + uy * py + uz * pz;
+      // Rodrigues rotation about the bond axis
+      atoms[i].x = bx + px * c + (uy * pz - uz * py) * s + ux * dot * (1 - c);
+      atoms[i].y = by + py * c + (uz * px - ux * pz) * s + uy * dot * (1 - c);
+      atoms[i].z = bz + pz * c + (ux * py - uy * px) * s + uz * dot * (1 - c);
+    }
+  }
+
+  const schedule = (now) => (nextMotion = now + WIGGLE_GAP_MS[0] + Math.random() * (WIGGLE_GAP_MS[1] - WIGGLE_GAP_MS[0]));
+
+  function startMotion(now) {
+    if (!rotors.length) return;
+    motion = { rotor: rotors[Math.floor(Math.random() * rotors.length)], t0: now };
+  }
+
+  function stepMotion(now) {
+    const { rotor, t0 } = motion;
+    const t = (now - t0) / (rotor.spin ? SPIN_MS : WAG_MS);
+    if (t >= 1) {
+      turn(rotor, 0); // back to rest exactly
+      motion = null;
+      schedule(now);
+    } else if (rotor.spin) {
+      turn(rotor, 2 * Math.PI * (t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t))); // ease in and out
+    } else {
+      turn(rotor, ((WAG_DEG * Math.PI) / 180) * Math.sin(4 * Math.PI * t) * (1 - t)); // two swings, dying away
+    }
+    dirty = true;
+    if (!rotor.spin) relabel(); // its heavy atoms carry labels
+  }
+
   // One label per heavy atom, drawn on the atom itself so labels can never
   // collide: chain number on carbons, element symbol on everything else
   // ("N1" when a ring nitrogen is also numbered). Ink flips to stay readable
@@ -115,6 +195,10 @@ export function createViewer(el, { background, neutral, text }) {
     const dt = now - lastFrame;
     lastFrame = now;
     if (!mol) return;
+    if (opts.wiggle && !reducedMotion) {
+      if (motion) stepMotion(now);
+      else if (now >= nextMotion) startMotion(now);
+    }
     // render() rebuilds geometry for restyled atoms; rotate() only redraws.
     if (dirty || pulses.size) (restyle(now), viewer.render());
     if (!reducedMotion && now - lastTouch > IDLE_MS) {
@@ -136,6 +220,10 @@ export function createViewer(el, { background, neutral, text }) {
       viewer.removeAllModels();
       const model = viewer.addModel(entry.molblock, 'sdf');
       atoms = model.selectedAtoms({});
+      base = atoms.map((a) => [a.x, a.y, a.z]);
+      rotors = findRotors();
+      motion = null;
+      schedule(performance.now());
       viewer.setHoverable({}, true, (atom) => hoverCb(mol.atomFragment[atom.index]), () => hoverCb(null));
       restyle(performance.now());
       relabel();
@@ -151,6 +239,7 @@ export function createViewer(el, { background, neutral, text }) {
     setOptions(next) {
       const restyled = next.style && next.style !== opts.style;
       opts = { ...opts, ...next };
+      if (!opts.wiggle && motion) (turn(motion.rotor, 0), (motion = null));
       dirty = true;
       relabel();
       if (restyled && !moved) (fit(), (rockAngle = rockClock = 0));
@@ -164,6 +253,12 @@ export function createViewer(el, { background, neutral, text }) {
     pulse(frag) {
       if (reducedMotion) return;
       pulses.set(frag, performance.now());
+    },
+    /** For tests: start an end-group motion now. Returns how many rotors the molecule has. */
+    wiggleNow() {
+      if (motion) (turn(motion.rotor, 0), (motion = null));
+      startMotion(performance.now());
+      return rotors.length;
     },
     onHover(cb) {
       hoverCb = cb;

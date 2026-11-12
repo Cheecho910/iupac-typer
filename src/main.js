@@ -400,7 +400,7 @@ function renderSession() {
 
 function renderCommon() {
   const show = mol.commonName && (mode === 'explore' || level < 3 || finished || S.commonInL3 || S.showName);
-  $('#common').replaceChildren(...(show ? [h('span', {}, 'common name'), ` ${mol.commonName}`] : []));
+  $('#common').replaceChildren(...(show ? [h('span', {}, 'also called'), ` ${mol.commonName}`] : []));
 }
 
 function renderSprint() {
@@ -616,6 +616,8 @@ function renderSettings() {
     h('h3', {}, 'Typing'),
     check('set-autopunct', 'Type hyphens, commas, spaces and parentheses for me', 'autoPunct', () => startMolecule(mol)),
     check('set-common', 'Show the common name during Recall (level 3)', 'commonInL3'),
+    h('h3', {}, 'Motion'),
+    check('set-wiggle', 'End groups spin and wag now and then (single bonds rotate)', 'wiggle', syncButtons),
     h('h3', {}, 'Playlists'),
     check('set-ramp', `Unlock a playlist in order: ${RAMP_WINDOW} molecules open, one more for each that reaches level 2`, 'ramp', () => renderExploreList()),
     h('h3', {}, 'Colors'),
@@ -746,7 +748,7 @@ function syncButtons() {
   pressed($('#btn-badges'), S.badges);
   pressed($('#btn-keyboard'), S.keyboard);
   for (const b of $('#styles').children) pressed(b, b.dataset.style === S.style);
-  viewer.setOptions({ style: S.style, locants: S.locants, badges: S.badges });
+  viewer.setOptions({ style: S.style, locants: S.locants, badges: S.badges, wiggle: S.wiggle });
 }
 
 $('#modes').addEventListener('click', (e) => e.target.dataset.mode && setMode(e.target.dataset.mode));
@@ -779,6 +781,8 @@ document.querySelector('.bar').addEventListener('click', (e) => {
 document.querySelector('.stage-tools').addEventListener('click', () => document.activeElement?.blur());
 window.addEventListener('resize', () => (viewer.resize(), fitName()));
 document.fonts?.ready.then(fitName);
+
+window.iupacDebug = { wiggle: () => viewer.wiggleNow() }; // used by tests/e2e
 
 buildKeyboard();
 syncButtons();

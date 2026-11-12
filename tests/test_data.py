@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import build_data as bd  # noqa: E402
 
 GROUPS = bd.load_groups()
-MOLS = yaml.safe_load(bd.SRC.read_text())
+MOLS = bd.load_molecules()
 BY_ID = {m["id"]: m for m in MOLS}
 
 
@@ -210,3 +210,50 @@ def test_opsin_catches_wrong_structure():
     assert bd.check_opsin(good, Chem.MolFromSmiles(good["smiles"]), opsin[0]) == []
     assert any("mismatch" in e for e in bd.check_opsin(bad, bad_mol, opsin[0]))
     assert any("could not parse" in e for e in bd.check_opsin(good, bad_mol, opsin[1]))
+
+
+# ---------------------------------------------------------------- generator + newer checks
+
+def test_generated_file_is_up_to_date():
+    import make_molecules as mm
+    assert mm.render(mm.generate()) == bd.GENERATED.read_text(), "run: python scripts/make_molecules.py"
+
+
+def test_longest_chain_enforced():
+    # 2-ethylpropan-1-ol: OPSIN parses it, but the real parent is butane
+    m = {
+        "fragments": [
+            {"text": "ethyl", "role": "substituent", "groupIds": ["alkyl"], "atoms": [3, 4]},
+            {"text": "propan", "role": "parent", "groupIds": ["parent"], "atoms": [0, 1, 2]},
+            {"text": "ol", "role": "suffix", "groupIds": ["hydroxyl"], "atoms": [5]},
+        ],
+        "locants": {2: 1, 1: 2, 0: 3},
+    }
+    mol = Chem.MolFromSmiles("CC(CO)CC")  # 0:C 1:C 2:C 3:O ... re-index below
+    m["fragments"][0]["atoms"], m["fragments"][2]["atoms"] = [4, 5], [3]
+    assert any("chain of 4" in e for e in bd.check_longest_chain(m, mol))
+    for mid in ("2-methylpropan-1-ol", "ethyl-ethanoate", "lidocaine", "3-methylbutan-1-ol"):
+        assert bd.check_longest_chain(BY_ID[mid], Chem.MolFromSmiles(BY_ID[mid]["smiles"])) == []
+
+
+def test_heterocycle_direction_checked_but_heteroatom_stays_1():
+    # 3-methylpyridine numbered the long way round would be 5-methylpyridine
+    def edit(m):
+        m["name"] = "5-methylpyridine"
+        m["fragments"][0]["text"] = "5-"
+        ring = sorted(m["locants"], key=lambda a: m["locants"][a])  # atoms in order 1..6
+        m["locants"] = {ring[0]: 1, **{a: 8 - k for k, a in enumerate(ring[1:], start=2)}}
+    m, mol = variant("3-methylpyridine", edit)
+    assert bd.check_locants(m, mol) == []
+    assert any("not lowest-locant" in e for e in bd.check_lowest_locants(m, mol))
+    good = BY_ID["3-methylpyridine"]
+    assert bd.check_lowest_locants(good, Chem.MolFromSmiles(good["smiles"])) == []
+    # purine is not a single ring walk, so it stays exempt
+    assert bd.check_lowest_locants(BY_ID["caffeine"], Chem.MolFromSmiles(BY_ID["caffeine"]["smiles"])) == []
+
+
+def test_ring_closing_double_bond_locant():
+    mol = Chem.MolFromSmiles("C1=CCCC=C1")  # cyclohexa-1,3-diene, bonds 0=1 and 4=5
+    frag = {"role": "ending", "atoms": [0, 1, 4, 5]}
+    assert bd.locant_sites(frag, mol, {5: "1", 0: "2", 1: "3", 2: "4", 3: "5", 4: "6"}) == ["2", "6"]
+    assert bd.locant_sites(frag, mol, {4: "1", 5: "2", 0: "3", 1: "4", 2: "5", 3: "6"}) == ["1", "3"]

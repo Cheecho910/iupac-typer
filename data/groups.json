@@ -5,6 +5,8 @@
     { "id": "alkyl",           "name": "Alkyl",           "color": "#CEDFF4", "priority": 10, "elements": { "C": "1+" } },
     { "id": "aromatic",        "name": "Aromatic ring",   "color": "#3697E0", "priority": 20, "elements": { "C": 6 } },
     { "id": "heteroaromatic",  "name": "Heteroaromatic ring", "alias": "aromatic", "priority": 20, "elements": { "C": "1+", "N": "0+", "O": "0+", "S": "0+" } },
+    { "id": "heterocycle",     "name": "Saturated heterocycle", "alias": "parent",   "priority": 0,  "elements": { "C": "1+", "N": "0+", "O": "0+", "S": "0+" } },
+    { "id": "oxo",             "name": "Oxo",                   "alias": "carbonyl", "priority": 70, "elements": { "O": 1 } },
     { "id": "alkene",          "name": "Alkene",          "color": "#B9FCC8", "priority": 30, "elements": { "C": 2 } },
     { "id": "alkyne",          "name": "Alkyne",          "color": "#BFD228", "priority": 30, "elements": { "C": 2 } },
     { "id": "halide",          "name": "Halide",          "color": "#65C009", "priority": 40, "elements": { "X": 1 } },
