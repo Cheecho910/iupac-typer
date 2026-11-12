@@ -1,0 +1,19 @@
+{
+  "_note": "Default colors were searched to maximise the smallest pairwise OKLab deltaE across all 13 colors (blends included) under normal, protan, deutan and tritan vision; tests/color.test.js enforces the floor. 'elements' is the heavy-atom composition a fragment of this group must own: int = exact, 'N+' = at least N, X = any halogen. Composites take theirs from the recipe. 'alias' = shares another group's color (no new color to keep distinct).",
+  "groups": [
+    { "id": "parent",          "name": "Parent chain",    "color": "#98A0AA", "priority": 0,  "elements": { "C": "0+" } },
+    { "id": "alkyl",           "name": "Alkyl",           "color": "#CEDFF4", "priority": 10, "elements": { "C": "1+" } },
+    { "id": "aromatic",        "name": "Aromatic ring",   "color": "#3697E0", "priority": 20, "elements": { "C": 6 } },
+    { "id": "heteroaromatic",  "name": "Heteroaromatic ring", "alias": "aromatic", "priority": 20, "elements": { "C": "1+", "N": "0+", "O": "0+", "S": "0+" } },
+    { "id": "alkene",          "name": "Alkene",          "color": "#B9FCC8", "priority": 30, "elements": { "C": 2 } },
+    { "id": "alkyne",          "name": "Alkyne",          "color": "#BFD228", "priority": 30, "elements": { "C": 2 } },
+    { "id": "halide",          "name": "Halide",          "color": "#65C009", "priority": 40, "elements": { "X": 1 } },
+    { "id": "ether-oxygen",    "name": "Ether oxygen",    "color": "#A8945D", "priority": 50, "elements": { "O": 1 } },
+    { "id": "amine",           "name": "Amine",           "color": "#79ACFD", "priority": 50, "elements": { "N": 1 } },
+    { "id": "hydroxyl",        "name": "Hydroxyl",        "color": "#E4F93D", "priority": 60, "elements": { "O": 1 } },
+    { "id": "carbonyl",        "name": "Carbonyl",        "color": "#FAB9AC", "priority": 70, "elements": { "C": 1, "O": 1 } },
+    { "id": "carboxylic-acid", "name": "Carboxylic acid", "priority": 80, "recipe": ["carbonyl", "hydroxyl"] },
+    { "id": "ester",           "name": "Ester",           "priority": 80, "recipe": ["carbonyl", "ether-oxygen"] },
+    { "id": "amide",           "name": "Amide",           "priority": 80, "recipe": ["carbonyl", "amine"] }
+  ]
+}

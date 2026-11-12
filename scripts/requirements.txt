@@ -1,0 +1,4 @@
+rdkit
+pyyaml
+py2opsin
+pytest

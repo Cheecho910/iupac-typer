@@ -1,0 +1,21 @@
+{
+  "name": "iupac-typer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "data": "python scripts/build_data.py",
+    "e2e": "vite build && node tests/e2e/controls.mjs"
+  },
+  "dependencies": {
+    "3dmol": "2.5.5"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1",
+    "vite": "^7.0.0",
+    "vitest": "^3.0.0"
+  }
+}

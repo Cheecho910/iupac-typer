@@ -1,0 +1,527 @@
+# Source of truth. Built + validated by scripts/build_data.py -> public/molecules.json
+#
+# fragments: ordered; texts must concatenate EXACTLY to `name`.
+#   role:     locant | substituent | parent | ending | suffix | separator
+#   groupIds: ids from data/groups.json (a locant carries the groupIds of the
+#             fragment it points to = the next atom-owning fragment)
+#   atoms:    heavy-atom indices in SMILES order. locant/separator own none.
+#             The suffix owns the characteristic-group atoms even if they are
+#             chain carbons (C=O carbon belongs to "one", not "propan").
+#   for:      (locant/descriptor only, optional) text of the fragment it points
+#             at, when that is not simply the next atom-owning fragment:
+#             "2-" in 2-(ethanoyloxy)... points at "oxy", the atom on the ring.
+#   role descriptor: text that modifies the parent hydride and owns no atoms
+#             (hydro prefixes, indicated hydrogen: "-3,7-dihydro-1H-").
+# locants: {heavyAtomIndex: label} for the parent chain/ring, independent of
+#          ownership. Labels are chain numbers, or a letter locant on the
+#          heteroatom it names ({3: N} for an amide N cited as "N-").
+# frames:  (optional) list of further {heavyAtomIndex: number} maps, one per
+#          substituent ring/chain that has its own locants ("4-" in
+#          N-(4-hydroxyphenyl)...). Atom 1 is the point of attachment.
+# numbering: fixed  (optional) retained fused parent (purine): numbers are data,
+#          may sit on heteroatoms, and are exempt from the path/lowest checks.
+
+# ---------------------------------------------------------------- T1
+
+- id: ethanol
+  name: ethanol
+  commonName: ethyl alcohol
+  smiles: CCO            # 0:C 1:C 2:O
+  tier: 1
+  tags: [alcohol]
+  fragments:
+    - { text: "ethan", role: parent, groupIds: [parent],   atoms: [0, 1] }
+    - { text: "ol",    role: suffix, groupIds: [hydroxyl], atoms: [2] }
+  locants: { 1: 1, 0: 2 }
+
+- id: propan-1-ol
+  name: propan-1-ol
+  commonName: n-propyl alcohol
+  smiles: CCCO           # 0:C 1:C 2:C 3:O
+  tier: 1
+  tags: [alcohol]
+  fragments:
+    - { text: "propan", role: parent, groupIds: [parent],   atoms: [0, 1, 2] }
+    - { text: "-1-",    role: locant, groupIds: [hydroxyl] }
+    - { text: "ol",     role: suffix, groupIds: [hydroxyl], atoms: [3] }
+  locants: { 2: 1, 1: 2, 0: 3 }
+
+- id: propan-2-ol
+  name: propan-2-ol
+  commonName: isopropyl alcohol
+  smiles: CC(O)C         # 0:C 1:C 2:O 3:C
+  tier: 1
+  tags: [alcohol]
+  fragments:
+    - { text: "propan", role: parent, groupIds: [parent],   atoms: [0, 1, 3] }
+    - { text: "-2-",    role: locant, groupIds: [hydroxyl] }
+    - { text: "ol",     role: suffix, groupIds: [hydroxyl], atoms: [2] }
+  locants: { 0: 1, 1: 2, 3: 3 }
+
+- id: ethanal
+  name: ethanal
+  commonName: acetaldehyde
+  smiles: CC=O           # 0:C 1:C 2:O
+  tier: 1
+  tags: [aldehyde]
+  fragments:
+    - { text: "ethan", role: parent, groupIds: [parent],   atoms: [0] }
+    - { text: "al",    role: suffix, groupIds: [carbonyl], atoms: [1, 2] }
+  locants: { 1: 1, 0: 2 }
+
+- id: propan-2-one
+  name: propan-2-one
+  commonName: acetone
+  smiles: CC(=O)C        # 0:C 1:C 2:O 3:C
+  tier: 1
+  tags: [ketone]
+  fragments:
+    - { text: "propan", role: parent, groupIds: [parent],   atoms: [0, 3] }
+    - { text: "-2-",    role: locant, groupIds: [carbonyl] }
+    - { text: "one",    role: suffix, groupIds: [carbonyl], atoms: [1, 2] }
+  locants: { 0: 1, 1: 2, 3: 3 }
+
+- id: butan-2-one
+  name: butan-2-one
+  commonName: methyl ethyl ketone
+  smiles: CCC(=O)C       # 0:C 1:C 2:C 3:O 4:C
+  tier: 1
+  tags: [ketone]
+  fragments:
+    - { text: "butan", role: parent, groupIds: [parent],   atoms: [0, 1, 4] }
+    - { text: "-2-",   role: locant, groupIds: [carbonyl] }
+    - { text: "one",   role: suffix, groupIds: [carbonyl], atoms: [2, 3] }
+  locants: { 4: 1, 2: 2, 1: 3, 0: 4 }
+
+- id: chloroethane
+  name: chloroethane
+  commonName: ethyl chloride
+  smiles: CCCl           # 0:C 1:C 2:Cl
+  tier: 1
+  tags: [halide]
+  fragments:
+    - { text: "chloro", role: substituent, groupIds: [halide], atoms: [2] }
+    - { text: "ethane", role: parent,      groupIds: [parent], atoms: [0, 1] }
+  locants: { 1: 1, 0: 2 }
+
+- id: propan-1-amine
+  name: propan-1-amine
+  commonName: propylamine
+  smiles: CCCN           # 0:C 1:C 2:C 3:N
+  tier: 1
+  tags: [amine]
+  fragments:
+    - { text: "propan", role: parent, groupIds: [parent], atoms: [0, 1, 2] }
+    - { text: "-1-",    role: locant, groupIds: [amine] }
+    - { text: "amine",  role: suffix, groupIds: [amine],  atoms: [3] }
+  locants: { 2: 1, 1: 2, 0: 3 }
+
+- id: prop-1-ene
+  name: prop-1-ene
+  commonName: propylene
+  smiles: C=CC           # 0:C 1:C 2:C
+  tier: 1
+  tags: [alkene]
+  fragments:
+    - { text: "prop", role: parent, groupIds: [parent], atoms: [2] }
+    - { text: "-1-",  role: locant, groupIds: [alkene] }
+    - { text: "ene",  role: ending, groupIds: [alkene], atoms: [0, 1] }
+  locants: { 0: 1, 1: 2, 2: 3 }
+
+- id: but-1-yne
+  name: but-1-yne
+  commonName: ethylacetylene
+  smiles: C#CCC          # 0:C 1:C 2:C 3:C
+  tier: 1
+  tags: [alkyne]
+  fragments:
+    - { text: "but", role: parent, groupIds: [parent], atoms: [2, 3] }
+    - { text: "-1-", role: locant, groupIds: [alkyne] }
+    - { text: "yne", role: ending, groupIds: [alkyne], atoms: [0, 1] }
+  locants: { 0: 1, 1: 2, 2: 3, 3: 4 }
+
+# ---------------------------------------------------------------- T2
+
+- id: 2-methylpropan-1-ol
+  name: 2-methylpropan-1-ol
+  commonName: isobutanol
+  smiles: CC(C)CO        # 0:C 1:C 2:C 3:C 4:O
+  tier: 2
+  tags: [alcohol, branched]
+  fragments:
+    - { text: "2-",     role: locant,      groupIds: [alkyl] }
+    - { text: "methyl", role: substituent, groupIds: [alkyl],    atoms: [2] }
+    - { text: "propan", role: parent,      groupIds: [parent],   atoms: [0, 1, 3] }
+    - { text: "-1-",    role: locant,      groupIds: [hydroxyl] }
+    - { text: "ol",     role: suffix,      groupIds: [hydroxyl], atoms: [4] }
+  locants: { 3: 1, 1: 2, 0: 3 }
+
+- id: 2-methylpropan-2-ol
+  name: 2-methylpropan-2-ol
+  commonName: tert-butyl alcohol
+  smiles: CC(C)(C)O      # 0:C 1:C 2:C 3:C 4:O
+  tier: 2
+  tags: [alcohol, branched]
+  fragments:
+    - { text: "2-",     role: locant,      groupIds: [alkyl] }
+    - { text: "methyl", role: substituent, groupIds: [alkyl],    atoms: [2] }
+    - { text: "propan", role: parent,      groupIds: [parent],   atoms: [0, 1, 3] }
+    - { text: "-2-",    role: locant,      groupIds: [hydroxyl] }
+    - { text: "ol",     role: suffix,      groupIds: [hydroxyl], atoms: [4] }
+  locants: { 0: 1, 1: 2, 3: 3 }
+
+- id: 3-methylbutan-1-ol
+  name: 3-methylbutan-1-ol
+  commonName: isoamyl alcohol
+  smiles: CC(C)CCO       # 0:C 1:C 2:C 3:C 4:C 5:O
+  tier: 2
+  tags: [alcohol, branched]
+  fragments:
+    - { text: "3-",     role: locant,      groupIds: [alkyl] }
+    - { text: "methyl", role: substituent, groupIds: [alkyl],    atoms: [2] }
+    - { text: "butan",  role: parent,      groupIds: [parent],   atoms: [0, 1, 3, 4] }
+    - { text: "-1-",    role: locant,      groupIds: [hydroxyl] }
+    - { text: "ol",     role: suffix,      groupIds: [hydroxyl], atoms: [5] }
+  locants: { 4: 1, 3: 2, 1: 3, 0: 4 }
+
+- id: 1-chloro-2-methylpropane
+  name: 1-chloro-2-methylpropane
+  commonName: isobutyl chloride
+  smiles: CC(C)CCl       # 0:C 1:C 2:C 3:C 4:Cl
+  tier: 2
+  tags: [halide, branched]
+  fragments:
+    - { text: "1-",      role: locant,      groupIds: [halide] }
+    - { text: "chloro",  role: substituent, groupIds: [halide], atoms: [4] }
+    - { text: "-2-",     role: locant,      groupIds: [alkyl] }
+    - { text: "methyl",  role: substituent, groupIds: [alkyl],  atoms: [2] }
+    - { text: "propane", role: parent,      groupIds: [parent], atoms: [0, 1, 3] }
+  locants: { 3: 1, 1: 2, 0: 3 }
+
+# ---------------------------------------------------------------- T3
+
+- id: ethanoic-acid
+  name: ethanoic acid
+  commonName: acetic acid
+  smiles: CC(=O)O        # 0:C 1:C 2:O 3:O
+  tier: 3
+  tags: [carboxylic-acid]
+  fragments:
+    - { text: "ethan",    role: parent, groupIds: [parent],          atoms: [0] }
+    - { text: "oic acid", role: suffix, groupIds: [carboxylic-acid], atoms: [1, 2, 3] }
+  locants: { 1: 1, 0: 2 }
+
+- id: propanoic-acid
+  name: propanoic acid
+  commonName: propionic acid
+  smiles: CCC(=O)O       # 0:C 1:C 2:C 3:O 4:O
+  tier: 3
+  tags: [carboxylic-acid]
+  fragments:
+    - { text: "propan",   role: parent, groupIds: [parent],          atoms: [0, 1] }
+    - { text: "oic acid", role: suffix, groupIds: [carboxylic-acid], atoms: [2, 3, 4] }
+  locants: { 2: 1, 1: 2, 0: 3 }
+
+- id: ethyl-ethanoate
+  name: ethyl ethanoate
+  commonName: ethyl acetate
+  smiles: CCOC(C)=O      # 0:C 1:C 2:O 3:C 4:C 5:O
+  tier: 3
+  tags: [ester]
+  fragments:
+    - { text: "ethyl", role: substituent, groupIds: [alkyl],  atoms: [0, 1] }
+    - { text: " ",     role: separator,   groupIds: [] }
+    - { text: "ethan", role: parent,      groupIds: [parent], atoms: [4] }
+    - { text: "oate",  role: suffix,      groupIds: [ester],  atoms: [2, 3, 5] }
+  locants: { 3: 1, 4: 2 }
+
+- id: methyl-propanoate
+  name: methyl propanoate
+  commonName: methyl propionate
+  smiles: CCC(=O)OC      # 0:C 1:C 2:C 3:O 4:O 5:C
+  tier: 3
+  tags: [ester]
+  fragments:
+    - { text: "methyl", role: substituent, groupIds: [alkyl],  atoms: [5] }
+    - { text: " ",      role: separator,   groupIds: [] }
+    - { text: "propan", role: parent,      groupIds: [parent], atoms: [0, 1] }
+    - { text: "oate",   role: suffix,      groupIds: [ester],  atoms: [2, 3, 4] }
+  locants: { 2: 1, 1: 2, 0: 3 }
+
+- id: propanamide
+  name: propanamide
+  commonName: propionamide
+  smiles: CCC(N)=O       # 0:C 1:C 2:C 3:N 4:O
+  tier: 3
+  tags: [amide]
+  fragments:
+    - { text: "propan", role: parent, groupIds: [parent], atoms: [0, 1] }
+    - { text: "amide",  role: suffix, groupIds: [amide],  atoms: [2, 3, 4] }
+  locants: { 2: 1, 1: 2, 0: 3 }
+
+# ---------------------------------------------------------------- T4
+
+- id: benzene
+  name: benzene
+  commonName: ""         # no common name distinct from the systematic one
+  smiles: c1ccccc1
+  tier: 4
+  tags: [aromatic]
+  fragments:
+    - { text: "benzene", role: parent, groupIds: [aromatic], atoms: [0, 1, 2, 3, 4, 5] }
+  locants: { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6 }
+
+- id: methylbenzene
+  name: methylbenzene
+  commonName: toluene
+  smiles: Cc1ccccc1      # 0:C 1-6: ring
+  tier: 4
+  tags: [aromatic]
+  fragments:
+    - { text: "methyl",  role: substituent, groupIds: [alkyl],    atoms: [0] }
+    - { text: "benzene", role: parent,      groupIds: [aromatic], atoms: [1, 2, 3, 4, 5, 6] }
+  locants: { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }
+
+- id: phenol
+  name: phenol
+  commonName: carbolic acid
+  smiles: Oc1ccccc1      # 0:O 1-6: ring
+  tier: 4
+  tags: [aromatic, alcohol]
+  fragments:
+    - { text: "phen", role: parent, groupIds: [aromatic], atoms: [1, 2, 3, 4, 5, 6] }
+    - { text: "ol",   role: suffix, groupIds: [hydroxyl], atoms: [0] }
+  locants: { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }
+
+- id: cyclohexanol
+  name: cyclohexanol
+  commonName: cyclohexyl alcohol
+  smiles: OC1CCCCC1      # 0:O 1-6: ring
+  tier: 4
+  tags: [ring, alcohol]
+  fragments:
+    - { text: "cyclohexan", role: parent, groupIds: [parent],   atoms: [1, 2, 3, 4, 5, 6] }
+    - { text: "ol",         role: suffix, groupIds: [hydroxyl], atoms: [0] }
+  locants: { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }
+
+- id: cyclohexanone
+  name: cyclohexanone
+  commonName: ""         # no common name distinct from the systematic one
+  smiles: O=C1CCCCC1     # 0:O 1-6: ring
+  tier: 4
+  tags: [ring, ketone]
+  fragments:
+    - { text: "cyclohexan", role: parent, groupIds: [parent],   atoms: [2, 3, 4, 5, 6] }
+    - { text: "one",        role: suffix, groupIds: [carbonyl], atoms: [0, 1] }
+  locants: { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }
+
+# ---------------------------------------------------------------- T5  benzoic acids, anilides
+
+- id: benzoic-acid
+  name: benzoic acid
+  commonName: ""         # retained name; nothing more common to show
+  smiles: OC(=O)c1ccccc1 # 0:O 1:C 2:O 3-8: ring (3 bears COOH)
+  tier: 5
+  tags: [aromatic, carboxylic-acid]
+  fragments:
+    - { text: "benz",     role: parent, groupIds: [aromatic],        atoms: [3, 4, 5, 6, 7, 8] }
+    - { text: "oic acid", role: suffix, groupIds: [carboxylic-acid], atoms: [0, 1, 2] }
+  locants: { 3: 1, 4: 2, 5: 3, 6: 4, 7: 5, 8: 6 }
+
+- id: 2-hydroxybenzoic-acid
+  name: 2-hydroxybenzoic acid
+  commonName: salicylic acid
+  smiles: OC(=O)c1ccccc1O   # 0:O 1:C 2:O 3:c(COOH) 4-7:c 8:c(OH) 9:O
+  tier: 5
+  tags: [aromatic, carboxylic-acid, alcohol]
+  fragments:
+    - { text: "2-",       role: locant,      groupIds: [hydroxyl] }
+    - { text: "hydroxy",  role: substituent, groupIds: [hydroxyl],        atoms: [9] }
+    - { text: "benz",     role: parent,      groupIds: [aromatic],        atoms: [3, 4, 5, 6, 7, 8] }
+    - { text: "oic acid", role: suffix,      groupIds: [carboxylic-acid], atoms: [0, 1, 2] }
+  locants: { 3: 1, 8: 2, 7: 3, 6: 4, 5: 5, 4: 6 }
+
+- id: methyl-2-hydroxybenzoate
+  name: methyl 2-hydroxybenzoate
+  commonName: methyl salicylate (oil of wintergreen)
+  smiles: COC(=O)c1ccccc1O  # 0:C 1:O 2:C 3:O 4:c(ester) 5-8:c 9:c(OH) 10:O
+  tier: 5
+  tags: [aromatic, ester, alcohol]
+  fragments:
+    - { text: "methyl",  role: substituent, groupIds: [alkyl],    atoms: [0] }
+    - { text: " ",       role: separator,   groupIds: [] }
+    - { text: "2-",      role: locant,      groupIds: [hydroxyl] }
+    - { text: "hydroxy", role: substituent, groupIds: [hydroxyl], atoms: [10] }
+    - { text: "benz",    role: parent,      groupIds: [aromatic], atoms: [4, 5, 6, 7, 8, 9] }
+    - { text: "oate",    role: suffix,      groupIds: [ester],    atoms: [1, 2, 3] }
+  locants: { 4: 1, 9: 2, 8: 3, 7: 4, 6: 5, 5: 6 }
+
+- id: 2-ethanoyloxybenzoic-acid
+  name: 2-(ethanoyloxy)benzoic acid
+  commonName: aspirin
+  smiles: CC(=O)Oc1ccccc1C(=O)O  # 0:C 1:C 2:O 3:O 4:c(O) 5-8:c 9:c(COOH) 10:C 11:O 12:O
+  tier: 5
+  tags: [aromatic, carboxylic-acid, ester, drug]
+  fragments:
+    - { text: "2-",       role: locant,      groupIds: [ether-oxygen], for: "oxy" }
+    - { text: "(",        role: separator,   groupIds: [] }
+    - { text: "ethan",    role: substituent, groupIds: [alkyl],           atoms: [0] }
+    - { text: "oyl",      role: substituent, groupIds: [carbonyl],        atoms: [1, 2] }
+    - { text: "oxy",      role: substituent, groupIds: [ether-oxygen],    atoms: [3] }
+    - { text: ")",        role: separator,   groupIds: [] }
+    - { text: "benz",     role: parent,      groupIds: [aromatic],        atoms: [4, 5, 6, 7, 8, 9] }
+    - { text: "oic acid", role: suffix,      groupIds: [carboxylic-acid], atoms: [10, 11, 12] }
+  locants: { 9: 1, 4: 2, 5: 3, 6: 4, 7: 5, 8: 6 }
+
+- id: 4-aminobenzoic-acid
+  name: 4-aminobenzoic acid
+  commonName: PABA
+  smiles: Nc1ccc(cc1)C(=O)O  # 0:N 1:c(N) 2:c 3:c 4:c(COOH) 5:c 6:c 7:C 8:O 9:O
+  tier: 5
+  tags: [aromatic, carboxylic-acid, amine]
+  fragments:
+    - { text: "4-",       role: locant,      groupIds: [amine] }
+    - { text: "amino",    role: substituent, groupIds: [amine],           atoms: [0] }
+    - { text: "benz",     role: parent,      groupIds: [aromatic],        atoms: [1, 2, 3, 4, 5, 6] }
+    - { text: "oic acid", role: suffix,      groupIds: [carboxylic-acid], atoms: [7, 8, 9] }
+  locants: { 4: 1, 3: 2, 2: 3, 1: 4, 6: 5, 5: 6 }
+
+- id: ethyl-4-aminobenzoate
+  name: ethyl 4-aminobenzoate
+  commonName: benzocaine
+  smiles: CCOC(=O)c1ccc(N)cc1  # 0:C 1:C 2:O 3:C 4:O 5:c(ester) 6:c 7:c 8:c(N) 9:N 10:c 11:c
+  tier: 5
+  tags: [aromatic, ester, amine, drug]
+  fragments:
+    - { text: "ethyl", role: substituent, groupIds: [alkyl],    atoms: [0, 1] }
+    - { text: " ",     role: separator,   groupIds: [] }
+    - { text: "4-",    role: locant,      groupIds: [amine] }
+    - { text: "amino", role: substituent, groupIds: [amine],    atoms: [9] }
+    - { text: "benz",  role: parent,      groupIds: [aromatic], atoms: [5, 6, 7, 8, 10, 11] }
+    - { text: "oate",  role: suffix,      groupIds: [ester],    atoms: [2, 3, 4] }
+  locants: { 5: 1, 6: 2, 7: 3, 8: 4, 10: 5, 11: 6 }
+
+- id: n-phenylethanamide
+  name: N-phenylethanamide
+  commonName: acetanilide
+  smiles: CC(=O)Nc1ccccc1  # 0:C 1:C 2:O 3:N 4-9: ring
+  tier: 5
+  tags: [aromatic, amide]
+  fragments:
+    - { text: "N-",     role: locant,      groupIds: [aromatic] }
+    - { text: "phenyl", role: substituent, groupIds: [aromatic], atoms: [4, 5, 6, 7, 8, 9] }
+    - { text: "ethan",  role: parent,      groupIds: [parent],   atoms: [0] }
+    - { text: "amide",  role: suffix,      groupIds: [amide],    atoms: [1, 2, 3] }
+  locants: { 1: 1, 0: 2, 3: N }
+
+- id: n-4-hydroxyphenyl-ethanamide
+  name: N-(4-hydroxyphenyl)ethanamide
+  commonName: paracetamol (acetaminophen)
+  smiles: CC(=O)Nc1ccc(O)cc1  # 0:C 1:C 2:O 3:N 4:c(N) 5:c 6:c 7:c(OH) 8:O 9:c 10:c
+  tier: 5
+  tags: [aromatic, amide, alcohol, drug]
+  fragments:
+    - { text: "N-",      role: locant,      groupIds: [aromatic], for: "phenyl" }
+    - { text: "(",       role: separator,   groupIds: [] }
+    - { text: "4-",      role: locant,      groupIds: [hydroxyl] }
+    - { text: "hydroxy", role: substituent, groupIds: [hydroxyl], atoms: [8] }
+    - { text: "phenyl",  role: substituent, groupIds: [aromatic], atoms: [4, 5, 6, 7, 9, 10] }
+    - { text: ")",       role: separator,   groupIds: [] }
+    - { text: "ethan",   role: parent,      groupIds: [parent],   atoms: [0] }
+    - { text: "amide",   role: suffix,      groupIds: [amide],    atoms: [1, 2, 3] }
+  locants: { 1: 1, 0: 2, 3: N }
+  frames:
+    - { 4: 1, 5: 2, 6: 3, 7: 4, 9: 5, 10: 6 }
+
+- id: lidocaine
+  name: 2-(diethylamino)-N-(2,6-dimethylphenyl)ethanamide
+  commonName: lidocaine
+  smiles: CCN(CC)CC(=O)Nc1c(C)cccc1C
+  # 0:C 1:C 2:N 3:C 4:C 5:C(H2) 6:C(=O) 7:O 8:N 9:c(N) 10:c(Me) 11:C 12:c 13:c 14:c 15:c(Me) 16:C
+  tier: 6
+  tags: [aromatic, amide, amine, drug]
+  fragments:
+    - { text: "2-",       role: locant,      groupIds: [amine], for: "amino" }
+    - { text: "(",        role: separator,   groupIds: [] }
+    - { text: "diethyl",  role: substituent, groupIds: [alkyl],    atoms: [0, 1, 3, 4] }
+    - { text: "amino",    role: substituent, groupIds: [amine],    atoms: [2] }
+    - { text: ")",        role: separator,   groupIds: [] }
+    - { text: "-N-",      role: locant,      groupIds: [aromatic], for: "phenyl" }
+    - { text: "(",        role: separator,   groupIds: [] }
+    - { text: "2,6-",     role: locant,      groupIds: [alkyl] }
+    - { text: "dimethyl", role: substituent, groupIds: [alkyl],    atoms: [11, 16] }
+    - { text: "phenyl",   role: substituent, groupIds: [aromatic], atoms: [9, 10, 12, 13, 14, 15] }
+    - { text: ")",        role: separator,   groupIds: [] }
+    - { text: "ethan",    role: parent,      groupIds: [parent],   atoms: [5] }
+    - { text: "amide",    role: suffix,      groupIds: [amide],    atoms: [6, 7, 8] }
+  locants: { 6: 1, 5: 2, 8: N }
+  frames:
+    - { 9: 1, 10: 2, 12: 3, 13: 4, 14: 5, 15: 6 }
+
+# ---------------------------------------------------------------- T6  xanthines (purine numbering is fixed)
+
+- id: xanthine
+  name: 3,7-dihydro-1H-purine-2,6-dione
+  commonName: xanthine
+  smiles: O=c1[nH]c(=O)c2[nH]cnc2[nH]1
+  # 0:O 1:c(C2) 2:n(N1) 3:c(C6) 4:O 5:c(C5) 6:n(N7) 7:c(C8) 8:n(N9) 9:c(C4) 10:n(N3)
+  tier: 6
+  tags: [heteroaromatic, xanthine]
+  numbering: fixed
+  fragments:
+    - { text: "3,7-dihydro-1H-", role: descriptor, groupIds: [heteroaromatic] }
+    - { text: "purine",          role: parent,     groupIds: [heteroaromatic], atoms: [2, 5, 6, 7, 8, 9, 10] }
+    - { text: "-2,6-",           role: locant,     groupIds: [carbonyl, carbonyl] }
+    - { text: "dione",           role: suffix,     groupIds: [carbonyl, carbonyl], atoms: [0, 1, 3, 4] }
+  locants: { 2: 1, 1: 2, 10: 3, 9: 4, 5: 5, 3: 6, 6: 7, 7: 8, 8: 9 }
+
+- id: theophylline
+  name: 1,3-dimethyl-3,7-dihydro-1H-purine-2,6-dione
+  commonName: theophylline
+  smiles: Cn1c(=O)c2[nH]cnc2n(C)c1=O
+  # 0:C 1:n(N1) 2:c(C6) 3:O 4:c(C5) 5:n(N7) 6:c(C8) 7:n(N9) 8:c(C4) 9:n(N3) 10:C 11:c(C2) 12:O
+  tier: 6
+  tags: [heteroaromatic, xanthine, drug]
+  numbering: fixed
+  fragments:
+    - { text: "1,3-",             role: locant,      groupIds: [alkyl] }
+    - { text: "dimethyl",         role: substituent, groupIds: [alkyl], atoms: [0, 10] }
+    - { text: "-3,7-dihydro-1H-", role: descriptor,  groupIds: [heteroaromatic] }
+    - { text: "purine",           role: parent,      groupIds: [heteroaromatic], atoms: [1, 4, 5, 6, 7, 8, 9] }
+    - { text: "-2,6-",            role: locant,      groupIds: [carbonyl, carbonyl] }
+    - { text: "dione",            role: suffix,      groupIds: [carbonyl, carbonyl], atoms: [2, 3, 11, 12] }
+  locants: { 1: 1, 11: 2, 9: 3, 8: 4, 4: 5, 2: 6, 5: 7, 6: 8, 7: 9 }
+
+- id: theobromine
+  name: 3,7-dimethyl-3,7-dihydro-1H-purine-2,6-dione
+  commonName: theobromine
+  smiles: Cn1cnc2c1c(=O)[nH]c(=O)n2C
+  # 0:C 1:n(N7) 2:c(C8) 3:n(N9) 4:c(C4) 5:c(C5) 6:c(C6) 7:O 8:n(N1) 9:c(C2) 10:O 11:n(N3) 12:C
+  tier: 6
+  tags: [heteroaromatic, xanthine, drug]
+  numbering: fixed
+  fragments:
+    - { text: "3,7-",             role: locant,      groupIds: [alkyl] }
+    - { text: "dimethyl",         role: substituent, groupIds: [alkyl], atoms: [0, 12] }
+    - { text: "-3,7-dihydro-1H-", role: descriptor,  groupIds: [heteroaromatic] }
+    - { text: "purine",           role: parent,      groupIds: [heteroaromatic], atoms: [1, 2, 3, 4, 5, 8, 11] }
+    - { text: "-2,6-",            role: locant,      groupIds: [carbonyl, carbonyl] }
+    - { text: "dione",            role: suffix,      groupIds: [carbonyl, carbonyl], atoms: [6, 7, 9, 10] }
+  locants: { 8: 1, 9: 2, 11: 3, 4: 4, 5: 5, 6: 6, 1: 7, 2: 8, 3: 9 }
+
+- id: caffeine
+  name: 1,3,7-trimethyl-3,7-dihydro-1H-purine-2,6-dione
+  commonName: caffeine
+  smiles: Cn1c(=O)c2c(ncn2C)n(C)c1=O
+  # 0:C 1:n(N1) 2:c(C6) 3:O 4:c(C5) 5:c(C4) 6:n(N9) 7:c(C8) 8:n(N7) 9:C 10:n(N3) 11:C 12:c(C2) 13:O
+  tier: 6
+  tags: [heteroaromatic, xanthine, drug]
+  numbering: fixed
+  fragments:
+    - { text: "1,3,7-",           role: locant,      groupIds: [alkyl] }
+    - { text: "trimethyl",        role: substituent, groupIds: [alkyl], atoms: [0, 9, 11] }
+    - { text: "-3,7-dihydro-1H-", role: descriptor,  groupIds: [heteroaromatic] }
+    - { text: "purine",           role: parent,      groupIds: [heteroaromatic], atoms: [1, 4, 5, 6, 7, 8, 10] }
+    - { text: "-2,6-",            role: locant,      groupIds: [carbonyl, carbonyl] }
+    - { text: "dione",            role: suffix,      groupIds: [carbonyl, carbonyl], atoms: [2, 3, 12, 13] }
+  locants: { 1: 1, 12: 2, 10: 3, 5: 4, 4: 5, 2: 6, 8: 7, 7: 8, 6: 9 }

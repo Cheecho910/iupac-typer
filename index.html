@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IUPAC Typer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b1014'/%3E%3Cpath d='M16 5l9.5 5.5v11L16 27l-9.5-5.5v-11z' fill='none' stroke='%23e3e9e6' stroke-width='2.4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <header class="bar">
+      <h1 class="brand">IUPAC<span>typer</span></h1>
+      <nav class="seg" id="modes" aria-label="Mode">
+        <button type="button" data-mode="zen">Zen</button>
+        <button type="button" data-mode="sprint">Sprint</button>
+        <button type="button" data-mode="explore">Explore</button>
+      </nav>
+      <label class="playlist" for="playlist">Playlist <select id="playlist"></select></label>
+      <div class="bar-right">
+        <button type="button" class="toggle" id="btn-showname" aria-pressed="false">Show name</button>
+        <button type="button" class="toggle" id="btn-settings" aria-pressed="false">Settings</button>
+      </div>
+    </header>
+
+    <div class="body">
+      <nav id="explore-list" aria-label="Molecules" hidden></nav>
+
+      <main class="play">
+        <section class="stage" aria-label="Molecule">
+          <div id="viewer"></div>
+          <div class="stage-top">
+            <span id="level" class="chip"></span>
+            <span id="sprint-hud" hidden></span>
+          </div>
+          <div id="sprint-bar" hidden><i></i></div>
+          <div class="stage-tools">
+            <div class="seg small" id="styles" aria-label="Rendering style">
+              <button type="button" data-style="ball">Ball &amp; stick</button>
+              <button type="button" data-style="space">Spacefill</button>
+              <button type="button" data-style="wire">Wireframe</button>
+            </div>
+            <button type="button" class="toggle small" id="btn-locants" aria-pressed="true">Locants</button>
+            <button type="button" class="toggle small" id="btn-badges" aria-pressed="true">Elements</button>
+            <button type="button" class="toggle small" id="btn-keyboard" aria-pressed="true">Keyboard</button>
+          </div>
+          <p id="common"></p>
+        </section>
+
+        <section class="type" aria-label="Name">
+          <div id="name" role="img"></div>
+          <div id="hud"></div>
+          <div id="session"></div>
+          <p id="keys"></p>
+          <div id="keyboard" aria-label="On-screen keyboard"></div>
+        </section>
+      </main>
+
+      <aside id="settings" aria-label="Settings" hidden></aside>
+    </div>
+
+    <div id="overlay" hidden><div class="card" id="card" role="dialog" aria-modal="true"></div></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

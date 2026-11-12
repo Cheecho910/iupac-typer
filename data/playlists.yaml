@@ -1,0 +1,59 @@
+# Ordered playlists. Built + validated by scripts/build_data.py: every id must
+# exist, and every molecule must be in at least one playlist. Order is the
+# ramp: with "Unlock in order" on, later molecules open up as earlier ones
+# reach level 2. Levels are per molecule and shared between playlists.
+
+- id: foundations
+  name: Foundations
+  description: Chains, one functional group at a time, then branches, acids and rings.
+  molecules:
+    - ethanol
+    - propan-1-ol
+    - propan-2-ol
+    - chloroethane
+    - propan-1-amine
+    - ethanal
+    - propan-2-one
+    - butan-2-one
+    - prop-1-ene
+    - but-1-yne
+    - 2-methylpropan-1-ol
+    - 2-methylpropan-2-ol
+    - 3-methylbutan-1-ol
+    - 1-chloro-2-methylpropane
+    - ethanoic-acid
+    - propanoic-acid
+    - ethyl-ethanoate
+    - methyl-propanoate
+    - propanamide
+    - benzene
+    - methylbenzene
+    - phenol
+    - cyclohexanol
+    - cyclohexanone
+
+- id: medicine-cabinet
+  name: Medicine cabinet
+  description: Substituted benzenes up to aspirin, benzocaine, paracetamol and lidocaine.
+  molecules:
+    - phenol
+    - ethanoic-acid
+    - benzoic-acid
+    - 2-hydroxybenzoic-acid
+    - methyl-2-hydroxybenzoate
+    - 2-ethanoyloxybenzoic-acid
+    - 4-aminobenzoic-acid
+    - ethyl-4-aminobenzoate
+    - propanamide
+    - n-phenylethanamide
+    - n-4-hydroxyphenyl-ethanamide
+    - lidocaine
+
+- id: xanthines
+  name: Caffeine and cousins
+  description: One fused ring system, four molecules. Only the methyl locants change.
+  molecules:
+    - xanthine
+    - theophylline
+    - theobromine
+    - caffeine

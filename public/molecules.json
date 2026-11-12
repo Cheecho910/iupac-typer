@@ -1,0 +1,3045 @@
+{
+ "playlists": [
+  {
+   "id": "foundations",
+   "name": "Foundations",
+   "description": "Chains, one functional group at a time, then branches, acids and rings.",
+   "molecules": [
+    "ethanol",
+    "propan-1-ol",
+    "propan-2-ol",
+    "chloroethane",
+    "propan-1-amine",
+    "ethanal",
+    "propan-2-one",
+    "butan-2-one",
+    "prop-1-ene",
+    "but-1-yne",
+    "2-methylpropan-1-ol",
+    "2-methylpropan-2-ol",
+    "3-methylbutan-1-ol",
+    "1-chloro-2-methylpropane",
+    "ethanoic-acid",
+    "propanoic-acid",
+    "ethyl-ethanoate",
+    "methyl-propanoate",
+    "propanamide",
+    "benzene",
+    "methylbenzene",
+    "phenol",
+    "cyclohexanol",
+    "cyclohexanone"
+   ]
+  },
+  {
+   "id": "medicine-cabinet",
+   "name": "Medicine cabinet",
+   "description": "Substituted benzenes up to aspirin, benzocaine, paracetamol and lidocaine.",
+   "molecules": [
+    "phenol",
+    "ethanoic-acid",
+    "benzoic-acid",
+    "2-hydroxybenzoic-acid",
+    "methyl-2-hydroxybenzoate",
+    "2-ethanoyloxybenzoic-acid",
+    "4-aminobenzoic-acid",
+    "ethyl-4-aminobenzoate",
+    "propanamide",
+    "n-phenylethanamide",
+    "n-4-hydroxyphenyl-ethanamide",
+    "lidocaine"
+   ]
+  },
+  {
+   "id": "xanthines",
+   "name": "Caffeine and cousins",
+   "description": "One fused ring system, four molecules. Only the methyl locants change.",
+   "molecules": [
+    "xanthine",
+    "theophylline",
+    "theobromine",
+    "caffeine"
+   ]
+  }
+ ],
+ "molecules": [
+  {
+   "id": "ethanol",
+   "name": "ethanol",
+   "commonName": "ethyl alcohol",
+   "smiles": "CCO",
+   "tier": 1,
+   "tags": [
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      2
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "0": "2"
+   },
+   "molblock": "\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n    1.2175    0.2667    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0463   -0.5664   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1712    0.2997   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2502    0.9183   -0.8795 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2502    0.9183    0.8795 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1058   -0.3711   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0889   -1.1994   -0.8914 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0889   -1.1994    0.8914 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9644   -0.2628   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\n  3  9  1  0\nM  END\n"
+  },
+  {
+   "id": "propan-1-ol",
+   "name": "propan-1-ol",
+   "commonName": "n-propyl alcohol",
+   "smiles": "CCCO",
+   "tier": 1,
+   "tags": [
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "text": "-1-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+   ],
+   "locants": {
+    "2": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 12 11  0  0  0  0  0  0  0  0999 V2000\n    1.2856   -0.1021    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0793    0.5625    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2063   -0.4604   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4617    0.2056    0.0180 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4164   -0.7295    0.8874 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4160   -0.7299   -0.8872 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0762    0.6548   -0.0003 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1736    1.2161   -0.8754 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1760    1.2157    0.8754 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1651   -1.0995   -0.8879 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1517   -1.1006    0.8860 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.5107    0.7598   -0.7795 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  1  5  1  0\n  1  6  1  0\n  1  7  1  0\n  2  8  1  0\n  2  9  1  0\n  3 10  1  0\n  3 11  1  0\n  4 12  1  0\nM  END\n"
+  },
+  {
+   "id": "propan-2-ol",
+   "name": "propan-2-ol",
+   "commonName": "isopropyl alcohol",
+   "smiles": "CC(O)C",
+   "tier": 1,
+   "tags": [
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      3
+     ]
+    },
+    {
+     "text": "-2-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      2
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "0": "1",
+    "1": "2",
+    "3": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 12 11  0  0  0  0  0  0  0  0999 V2000\n   -1.2614    0.2682    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0079   -0.5699   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0341   -1.3858    1.1668 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2535    0.3017   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1463   -0.3773    0.0091 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3194    0.8929    0.8982 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3116    0.9141   -0.8818 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0223   -1.2289   -0.8748 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7587   -1.9487    1.1488 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1547   -0.3207    0.0195 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2913    0.9423   -0.8863 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2904    0.9350    0.8934 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2  4  1  0\n  1  5  1  0\n  1  6  1  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  4 11  1  0\n  4 12  1  0\nM  END\n"
+  },
+  {
+   "id": "ethanal",
+   "name": "ethanal",
+   "commonName": "acetaldehyde",
+   "smiles": "CC=O",
+   "tier": 1,
+   "tags": [
+    "aldehyde"
+   ],
+   "fragments": [
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "al",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [
+      1,
+      2
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "0": "2"
+   },
+   "molblock": "\n     RDKit          3D\n\n  7  6  0  0  0  0  0  0  0  0999 V2000\n    1.2574    0.1815   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1130   -0.4226   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1444    0.2411    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.1864    1.2720   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7933   -0.1480    0.8931 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7933   -0.1480   -0.8931 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1478   -1.5251    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\nM  END\n"
+  },
+  {
+   "id": "propan-2-one",
+   "name": "propan-2-one",
+   "commonName": "acetone",
+   "smiles": "CC(=O)C",
+   "tier": 1,
+   "tags": [
+    "ketone"
+   ],
+   "fragments": [
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      3
+     ]
+    },
+    {
+     "text": "-2-",
+     "role": "locant",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "one",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [
+      1,
+      2
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "0": "1",
+    "1": "2",
+    "3": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 10  9  0  0  0  0  0  0  0  0999 V2000\n   -1.2811    0.2631   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -0.5262    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -1.7563    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2811    0.2631    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3272    0.8865    0.8963 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3272    0.8865   -0.8963 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1351   -0.4199    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3272    0.8865    0.8963 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3272    0.8865   -0.8963 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1351   -0.4199   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  1  5  1  0\n  1  6  1  0\n  1  7  1  0\n  4  8  1  0\n  4  9  1  0\n  4 10  1  0\nM  END\n"
+  },
+  {
+   "id": "butan-2-one",
+   "name": "butan-2-one",
+   "commonName": "methyl ethyl ketone",
+   "smiles": "CCC(=O)C",
+   "tier": 1,
+   "tags": [
+    "ketone"
+   ],
+   "fragments": [
+    {
+     "text": "butan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      4
+     ]
+    },
+    {
+     "text": "-2-",
+     "role": "locant",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "one",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [
+      2,
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "4": "1",
+    "2": "2",
+    "1": "3",
+    "0": "4"
+   },
+   "molblock": "\n     RDKit          3D\n\n 13 12  0  0  0  0  0  0  0  0999 V2000\n    1.9132    0.3556   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6308   -0.4564    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6123    0.4142    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5660    1.6433    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9317   -0.3133   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9720    0.9980    0.8849 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9720    0.9980   -0.8849 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.7841   -0.3071   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6012   -1.0940   -0.8897 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6012   -1.0940    0.8897 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7520    0.4099   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.0079   -0.9337    0.8964 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.0079   -0.9337   -0.8964 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  3  5  1  0\n  1  6  1  0\n  1  7  1  0\n  1  8  1  0\n  2  9  1  0\n  2 10  1  0\n  5 11  1  0\n  5 12  1  0\n  5 13  1  0\nM  END\n"
+  },
+  {
+   "id": "chloroethane",
+   "name": "chloroethane",
+   "commonName": "ethyl chloride",
+   "smiles": "CCCl",
+   "tier": 1,
+   "tags": [
+    "halide"
+   ],
+   "fragments": [
+    {
+     "text": "chloro",
+     "role": "substituent",
+     "groupIds": [
+      "halide"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": "ethane",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "0": "2"
+   },
+   "molblock": "\n     RDKit          3D\n\n  8  7  0  0  0  0  0  0  0  0999 V2000\n    1.2906    0.3513   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1259   -0.6166    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4165    0.2653    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n    1.2732    0.9925    0.8874 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2732    0.9925   -0.8874 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2374   -0.1980    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1505   -1.2536    0.8886 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1505   -1.2536   -0.8886 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  1  6  1  0\n  2  7  1  0\n  2  8  1  0\nM  END\n"
+  },
+  {
+   "id": "propan-1-amine",
+   "name": "propan-1-amine",
+   "commonName": "propylamine",
+   "smiles": "CCCN",
+   "tier": 1,
+   "tags": [
+    "amine"
+   ],
+   "fragments": [
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "text": "-1-",
+     "role": "locant",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "amine",
+     "role": "suffix",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2
+   ],
+   "locants": {
+    "2": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 13 12  0  0  0  0  0  0  0  0999 V2000\n    1.2853   -0.1035    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0797    0.5672   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2056   -0.4637    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.5023    0.2030   -0.0085 N   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4139   -0.7315   -0.8874 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0783    0.6510   -0.0001 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4139   -0.7314    0.8875 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1608    1.2131   -0.8828 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1597    1.2136    0.8825 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1287   -1.1059   -0.8839 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1327   -1.1049    0.8854 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2420   -0.4961    0.0440 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.5965    0.7816    0.8253 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  1  5  1  0\n  1  6  1  0\n  1  7  1  0\n  2  8  1  0\n  2  9  1  0\n  3 10  1  0\n  3 11  1  0\n  4 12  1  0\n  4 13  1  0\nM  END\n"
+  },
+  {
+   "id": "prop-1-ene",
+   "name": "prop-1-ene",
+   "commonName": "propylene",
+   "smiles": "C=CC",
+   "tier": 1,
+   "tags": [
+    "alkene"
+   ],
+   "fragments": [
+    {
+     "text": "prop",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": "-1-",
+     "role": "locant",
+     "groupIds": [
+      "alkene"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "ene",
+     "role": "ending",
+     "groupIds": [
+      "alkene"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    0,
+    2,
+    2,
+    2,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "0": "1",
+    "1": "2",
+    "2": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n  9  8  0  0  0  0  0  0  0  0999 V2000\n   -1.2194    0.2368    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0644   -0.4397    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2837    0.2029   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2458    1.3221   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1700   -0.2876    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0873   -1.5273    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2206    1.2957    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8443   -0.1069    0.8872 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8443   -0.1069   -0.8872 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  1  4  1  0\n  1  5  1  0\n  2  6  1  0\n  3  7  1  0\n  3  8  1  0\n  3  9  1  0\nM  END\n"
+  },
+  {
+   "id": "but-1-yne",
+   "name": "but-1-yne",
+   "commonName": "ethylacetylene",
+   "smiles": "C#CCC",
+   "tier": 1,
+   "tags": [
+    "alkyne"
+   ],
+   "fragments": [
+    {
+     "text": "but",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      2,
+      3
+     ]
+    },
+    {
+     "text": "-1-",
+     "role": "locant",
+     "groupIds": [
+      "alkyne"
+     ],
+     "atoms": [],
+     "target": 2
+    },
+    {
+     "text": "yne",
+     "role": "ending",
+     "groupIds": [
+      "alkyne"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "0": "1",
+    "1": "2",
+    "2": "3",
+    "3": "4"
+   },
+   "molblock": "\n     RDKit          3D\n\n 10  9  0  0  0  0  0  0  0  0999 V2000\n   -1.7878    0.2744   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6588   -0.1348    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7210   -0.6396   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7256    0.5000   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7896    0.6377   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8852   -1.2692    0.8815 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8852   -1.2692   -0.8815 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6049    1.1340    0.8852 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6049    1.1340   -0.8852 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.7471    0.1067    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  3  0\n  2  3  1  0\n  3  4  1  0\n  1  5  1  0\n  3  6  1  0\n  3  7  1  0\n  4  8  1  0\n  4  9  1  0\n  4 10  1  0\nM  END\n"
+  },
+  {
+   "id": "2-methylpropan-1-ol",
+   "name": "2-methylpropan-1-ol",
+   "commonName": "isobutanol",
+   "smiles": "CC(C)CO",
+   "tier": 2,
+   "tags": [
+    "alcohol",
+    "branched"
+   ],
+   "fragments": [
+    {
+     "text": "2-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      3
+     ]
+    },
+    {
+     "text": "-1-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 4
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    1,
+    2,
+    4,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    2,
+    2,
+    4
+   ],
+   "locants": {
+    "3": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 15 14  0  0  0  0  0  0  0  0999 V2000\n    1.2670   -0.2331    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0250    0.5811    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0523    1.5354   -1.1959 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2420   -0.3480   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4342    0.4159    0.1246 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3130   -0.8893    0.8755 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1418    0.4251    0.0301 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3437   -0.8578   -0.8965 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0543    1.1945    0.9096 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8217    2.1954   -1.1848 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0480    0.9848   -2.1428 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9449    2.1690   -1.1762 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1953   -1.0429    0.8452 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2957   -0.9291   -0.9270 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1768   -0.2118    0.1219 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2  4  1  0\n  4  5  1  0\n  1  6  1  0\n  1  7  1  0\n  1  8  1  0\n  2  9  1  0\n  3 10  1  0\n  3 11  1  0\n  3 12  1  0\n  4 13  1  0\n  4 14  1  0\n  5 15  1  0\nM  END\n"
+  },
+  {
+   "id": "2-methylpropan-2-ol",
+   "name": "2-methylpropan-2-ol",
+   "commonName": "tert-butyl alcohol",
+   "smiles": "CC(C)(C)O",
+   "tier": 2,
+   "tags": [
+    "alcohol",
+    "branched"
+   ],
+   "fragments": [
+    {
+     "text": "2-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      3
+     ]
+    },
+    {
+     "text": "-2-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 4
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    1,
+    2,
+    4,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    4
+   ],
+   "locants": {
+    "0": "1",
+    "1": "2",
+    "3": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 15 14  0  0  0  0  0  0  0  0999 V2000\n   -1.2585    0.2889    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -0.5778   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -1.5250   -1.1979 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2585    0.2889   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -1.3791    1.1821 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3185    0.9131   -0.8975 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1596   -0.3328    0.0525 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2828    0.9433    0.8789 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -0.9776   -2.1461 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8774   -2.1815   -1.1761 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8774   -2.1815   -1.1761 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1596   -0.3328    0.0525 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2828    0.9433    0.8788 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3185    0.9131   -0.8975 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0000   -0.7818    1.9496 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2  4  1  0\n  2  5  1  0\n  1  6  1  0\n  1  7  1  0\n  1  8  1  0\n  3  9  1  0\n  3 10  1  0\n  3 11  1  0\n  4 12  1  0\n  4 13  1  0\n  4 14  1  0\n  5 15  1  0\nM  END\n"
+  },
+  {
+   "id": "3-methylbutan-1-ol",
+   "name": "3-methylbutan-1-ol",
+   "commonName": "isoamyl alcohol",
+   "smiles": "CC(C)CCO",
+   "tier": 2,
+   "tags": [
+    "alcohol",
+    "branched"
+   ],
+   "fragments": [
+    {
+     "text": "3-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": "butan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      3,
+      4
+     ]
+    },
+    {
+     "text": "-1-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 4
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      5
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    1,
+    2,
+    2,
+    4,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    4
+   ],
+   "locants": {
+    "4": "1",
+    "3": "2",
+    "1": "3",
+    "0": "4"
+   },
+   "molblock": "\n     RDKit          3D\n\n 18 17  0  0  0  0  0  0  0  0999 V2000\n    1.8163    0.6762   -0.0350 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7008   -0.3696    0.0324 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.9045   -1.2640    1.2560 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6690    0.3280    0.0388 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.8481   -0.6346   -0.0362 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0486    0.1217   -0.1334 O   0  0  0  0  0  0  0  0  0  0  0  0\n    2.7992    0.1949   -0.0794 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7114    1.3004   -0.9287 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7996    1.3328    0.8416 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7726   -0.9954   -0.8661 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7800   -0.6991    2.1860 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1939   -2.0960    1.2640 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9105   -1.6977    1.2566 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7316    1.0206   -0.8112 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7735    0.9564    0.9331 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9131   -1.2585    0.8596 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.7715   -1.2782   -0.9181 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.7827   -0.5141   -0.1840 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2  4  1  0\n  4  5  1  0\n  5  6  1  0\n  1  7  1  0\n  1  8  1  0\n  1  9  1  0\n  2 10  1  0\n  3 11  1  0\n  3 12  1  0\n  3 13  1  0\n  4 14  1  0\n  4 15  1  0\n  5 16  1  0\n  5 17  1  0\n  6 18  1  0\nM  END\n"
+  },
+  {
+   "id": "1-chloro-2-methylpropane",
+   "name": "1-chloro-2-methylpropane",
+   "commonName": "isobutyl chloride",
+   "smiles": "CC(C)CCl",
+   "tier": 2,
+   "tags": [
+    "halide",
+    "branched"
+   ],
+   "fragments": [
+    {
+     "text": "1-",
+     "role": "locant",
+     "groupIds": [
+      "halide"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "chloro",
+     "role": "substituent",
+     "groupIds": [
+      "halide"
+     ],
+     "atoms": [
+      4
+     ]
+    },
+    {
+     "text": "-2-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": "propane",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1,
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    4,
+    4,
+    3,
+    4,
+    1,
+    4,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    4,
+    4
+   ],
+   "locants": {
+    "3": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 14 13  0  0  0  0  0  0  0  0999 V2000\n    0.7404   -1.0729   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3877    0.4154   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0929    1.1345    1.1510 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1280    0.6575    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9535    0.0338    1.4489 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n    0.4542   -1.5619    0.9366 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8195   -1.2109   -0.1285 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2386   -1.5915   -0.8237 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7756    0.8410   -0.9350 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8182    0.7170    2.1249 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8443    2.2010    1.1538 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1801    1.0469    1.0487 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3433    1.7293   -0.0586 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5912    0.1772   -0.8679 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2  4  1  0\n  4  5  1  0\n  1  6  1  0\n  1  7  1  0\n  1  8  1  0\n  2  9  1  0\n  3 10  1  0\n  3 11  1  0\n  3 12  1  0\n  4 13  1  0\n  4 14  1  0\nM  END\n"
+  },
+  {
+   "id": "ethanoic-acid",
+   "name": "ethanoic acid",
+   "commonName": "acetic acid",
+   "smiles": "CC(=O)O",
+   "tier": 3,
+   "tags": [
+    "carboxylic-acid"
+   ],
+   "fragments": [
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "oic acid",
+     "role": "suffix",
+     "groupIds": [
+      "carboxylic-acid"
+     ],
+     "atoms": [
+      1,
+      2,
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "0": "2"
+   },
+   "molblock": "\n     RDKit          3D\n\n  8  7  0  0  0  0  0  0  0  0999 V2000\n    1.4145   -0.2169   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0700   -0.0592    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8953   -0.9560   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4491    1.2321   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6650   -1.2815    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8356    0.2408   -0.8985 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8356    0.2408    0.8985 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4285    1.1926    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  1  5  1  0\n  1  6  1  0\n  1  7  1  0\n  4  8  1  0\nM  END\n"
+  },
+  {
+   "id": "propanoic-acid",
+   "name": "propanoic acid",
+   "commonName": "propionic acid",
+   "smiles": "CCC(=O)O",
+   "tier": 3,
+   "tags": [
+    "carboxylic-acid"
+   ],
+   "fragments": [
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    },
+    {
+     "text": "oic acid",
+     "role": "suffix",
+     "groupIds": [
+      "carboxylic-acid"
+     ],
+     "atoms": [
+      2,
+      3,
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "locants": {
+    "2": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 11 10  0  0  0  0  0  0  0  0999 V2000\n    1.2483   -0.3080    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0057    0.5646    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2540   -0.2567   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3505   -1.4714    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3570    0.5180   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2759   -0.9529    0.8846 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2759   -0.9529   -0.8846 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1499    0.3121   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0063    1.1994   -0.8922 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0063    1.1994    0.8922 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0971   -0.1248   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  3  5  1  0\n  1  6  1  0\n  1  7  1  0\n  1  8  1  0\n  2  9  1  0\n  2 10  1  0\n  5 11  1  0\nM  END\n"
+  },
+  {
+   "id": "ethyl-ethanoate",
+   "name": "ethyl ethanoate",
+   "commonName": "ethyl acetate",
+   "smiles": "CCOC(C)=O",
+   "tier": 3,
+   "tags": [
+    "ester"
+   ],
+   "fragments": [
+    {
+     "text": "ethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    },
+    {
+     "text": " ",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      4
+     ]
+    },
+    {
+     "text": "oate",
+     "role": "suffix",
+     "groupIds": [
+      "ester"
+     ],
+     "atoms": [
+      2,
+      3,
+      5
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    3,
+    3,
+    2,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    2
+   ],
+   "locants": {
+    "3": "1",
+    "4": "2"
+   },
+   "molblock": "\n     RDKit          3D\n\n 14 13  0  0  0  0  0  0  0  0999 V2000\n   -2.6381   -0.3253   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3343    0.4487    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2547   -0.4930    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.9812    0.0774   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0360   -0.9863   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2100    1.2785   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4952    0.3539   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7011   -0.9744    0.8797 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7011   -0.9744   -0.8797 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2771    1.0769   -0.8961 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2771    1.0769    0.8961 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9426   -1.6010   -0.8988 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.0239   -0.5169   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9426   -1.6010    0.8988 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  4  5  1  0\n  4  6  2  0\n  1  7  1  0\n  1  8  1  0\n  1  9  1  0\n  2 10  1  0\n  2 11  1  0\n  5 12  1  0\n  5 13  1  0\n  5 14  1  0\nM  END\n"
+  },
+  {
+   "id": "methyl-propanoate",
+   "name": "methyl propanoate",
+   "commonName": "methyl propionate",
+   "smiles": "CCC(=O)OC",
+   "tier": 3,
+   "tags": [
+    "ester"
+   ],
+   "fragments": [
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      5
+     ]
+    },
+    {
+     "text": " ",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    },
+    {
+     "text": "oate",
+     "role": "suffix",
+     "groupIds": [
+      "ester"
+     ],
+     "atoms": [
+      2,
+      3,
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    3,
+    3,
+    3,
+    0,
+    2,
+    2,
+    2,
+    2,
+    2,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "2": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 14 13  0  0  0  0  0  0  0  0999 V2000\n    1.2594   -0.2738    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0072    0.5641   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2522   -0.2903    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2761   -1.5126   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3528    0.5152    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.5915   -0.1958    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1433    0.3714   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3051   -0.9174    0.8848 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3051   -0.9174   -0.8848 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0222    1.1987   -0.8923 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0222    1.1987    0.8923 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.4028    0.5374    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.6806   -0.8108   -0.9010 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.6806   -0.8108    0.9010 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  3  5  1  0\n  5  6  1  0\n  1  7  1  0\n  1  8  1  0\n  1  9  1  0\n  2 10  1  0\n  2 11  1  0\n  6 12  1  0\n  6 13  1  0\n  6 14  1  0\nM  END\n"
+  },
+  {
+   "id": "propanamide",
+   "name": "propanamide",
+   "commonName": "propionamide",
+   "smiles": "CCC(N)=O",
+   "tier": 3,
+   "tags": [
+    "amide"
+   ],
+   "fragments": [
+    {
+     "text": "propan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    },
+    {
+     "text": "amide",
+     "role": "suffix",
+     "groupIds": [
+      "amide"
+     ],
+     "atoms": [
+      2,
+      3,
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "locants": {
+    "2": "1",
+    "1": "2",
+    "0": "3"
+   },
+   "molblock": "\n     RDKit          3D\n\n 12 11  0  0  0  0  0  0  0  0999 V2000\n    1.2553   -0.2991   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0058    0.5628   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2611   -0.2637    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4082    0.4758    0.0054 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3018   -1.4871    0.0010 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2886   -0.9433    0.8849 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2884   -0.9436   -0.8847 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1517    0.3286   -0.0002 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0024    1.2044    0.8881 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0027    1.2039   -0.8885 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2837   -0.0283   -0.0503 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4143    1.4750   -0.1413 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  3  5  2  0\n  1  6  1  0\n  1  7  1  0\n  1  8  1  0\n  2  9  1  0\n  2 10  1  0\n  4 11  1  0\n  4 12  1  0\nM  END\n"
+  },
+  {
+   "id": "benzene",
+   "name": "benzene",
+   "commonName": "",
+   "smiles": "c1ccccc1",
+   "tier": 4,
+   "tags": [
+    "aromatic"
+   ],
+   "fragments": [
+    {
+     "text": "benzene",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "0": "1",
+    "1": "2",
+    "2": "3",
+    "3": "4",
+    "4": "5",
+    "5": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 12 12  0  0  0  0  0  0  0  0999 V2000\n    0.9048    1.0615   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4669    1.3144   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3717    0.2528    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9048   -1.0615   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4669   -1.3144   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3717   -0.2528    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6098    1.8886   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8307    2.3384   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.4405    0.4498    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6098   -1.8886   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8307   -2.3384   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4405   -0.4498    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  3  4  1  0\n  4  5  2  0\n  5  6  1  0\n  6  1  2  0\n  1  7  1  0\n  2  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\nM  END\n"
+  },
+  {
+   "id": "methylbenzene",
+   "name": "methylbenzene",
+   "commonName": "toluene",
+   "smiles": "Cc1ccccc1",
+   "tier": 4,
+   "tags": [
+    "aromatic"
+   ],
+   "fragments": [
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "benzene",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 15 15  0  0  0  0  0  0  0  0999 V2000\n   -2.9052   -0.0000    0.0313 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4058   -0.0000   -0.0067 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6959    1.2071    0.0042 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7000    1.2064    0.0007 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3977    0.0000   -0.0032 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7000   -1.2064    0.0007 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6959   -1.2071    0.0042 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.3088    0.8816   -0.4778 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2531    0.0000    1.0688 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.3088   -0.8816   -0.4778 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2269    2.1561    0.0148 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2429    2.1478    0.0039 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4843   -0.0000   -0.0051 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2429   -2.1478    0.0039 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2269   -2.1561    0.0148 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  3  4  1  0\n  4  5  2  0\n  5  6  1  0\n  6  7  2  0\n  7  2  1  0\n  1  8  1  0\n  1  9  1  0\n  1 10  1  0\n  3 11  1  0\n  4 12  1  0\n  5 13  1  0\n  6 14  1  0\n  7 15  1  0\nM  END\n"
+  },
+  {
+   "id": "phenol",
+   "name": "phenol",
+   "commonName": "carbolic acid",
+   "smiles": "Oc1ccccc1",
+   "tier": 4,
+   "tags": [
+    "aromatic",
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "phen",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      0
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 13 13  0  0  0  0  0  0  0  0999 V2000\n   -2.7494    0.0023   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3859   -0.0211   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7172    1.1979    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6773    1.2202    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3931    0.0224   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7142   -1.1974    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6816   -1.2219    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0727   -0.9133   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2802    2.1267    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2043    2.1705    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4800    0.0398   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2744   -2.1289    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1962   -2.1772    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  3  4  1  0\n  4  5  2  0\n  5  6  1  0\n  6  7  2  0\n  7  2  1  0\n  1  8  1  0\n  3  9  1  0\n  4 10  1  0\n  5 11  1  0\n  6 12  1  0\n  7 13  1  0\nM  END\n"
+  },
+  {
+   "id": "cyclohexanol",
+   "name": "cyclohexanol",
+   "commonName": "cyclohexyl alcohol",
+   "smiles": "OC1CCCCC1",
+   "tier": 4,
+   "tags": [
+    "ring",
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "cyclohexan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "text": "ol",
+     "role": "suffix",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      0
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 19 19  0  0  0  0  0  0  0  0999 V2000\n   -2.7736   -0.0001   -0.3171 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4586   -0.0076    0.2277 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7211   -1.2663   -0.2270 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7354   -1.2596    0.2254 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4576    0.0080   -0.2244 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7215    1.2675    0.2256 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7348    1.2579   -0.2273 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2204   -0.8092   -0.0150 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5495   -0.0028    1.3205 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2303   -2.1563    0.1619 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7722   -1.3497   -1.3205 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7776   -1.3345    1.3190 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2507   -2.1397   -0.1753 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4773    0.0136    0.1769 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.5444    0.0086   -1.3180 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2270    2.1533   -0.1750 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7627    1.3428    1.3192 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7854    1.3403   -1.3210 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2551    2.1421    0.1602 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  4  5  1  0\n  5  6  1  0\n  6  7  1  0\n  7  2  1  0\n  1  8  1  0\n  2  9  1  0\n  3 10  1  0\n  3 11  1  0\n  4 12  1  0\n  4 13  1  0\n  5 14  1  0\n  5 15  1  0\n  6 16  1  0\n  6 17  1  0\n  7 18  1  0\n  7 19  1  0\nM  END\n"
+  },
+  {
+   "id": "cyclohexanone",
+   "name": "cyclohexanone",
+   "commonName": "",
+   "smiles": "O=C1CCCCC1",
+   "tier": 4,
+   "tags": [
+    "ring",
+    "ketone"
+   ],
+   "fragments": [
+    {
+     "text": "cyclohexan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "text": "one",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 17 17  0  0  0  0  0  0  0  0999 V2000\n   -2.5503    0.0000    0.6901 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4284    0.0000    0.1856 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7323    1.2861   -0.1997 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7266    1.2580    0.2349 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4397   -0.0000   -0.2561 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7266   -1.2580    0.2349 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7323   -1.2861   -0.1997 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2459    2.1285    0.2752 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8143    1.4043   -1.2855 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2415    2.1474   -0.1451 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7822    1.2977    1.3301 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4744   -0.0000    0.1047 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4798   -0.0000   -1.3521 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2415   -2.1474   -0.1451 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7822   -1.2977    1.3301 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2459   -2.1285    0.2752 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8143   -1.4043   -1.2855 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  1  0\n  4  5  1  0\n  5  6  1  0\n  6  7  1  0\n  7  2  1  0\n  3  8  1  0\n  3  9  1  0\n  4 10  1  0\n  4 11  1  0\n  5 12  1  0\n  5 13  1  0\n  6 14  1  0\n  6 15  1  0\n  7 16  1  0\n  7 17  1  0\nM  END\n"
+  },
+  {
+   "id": "benzoic-acid",
+   "name": "benzoic acid",
+   "commonName": "",
+   "smiles": "OC(=O)c1ccccc1",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "carboxylic-acid"
+   ],
+   "fragments": [
+    {
+     "text": "benz",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ]
+    },
+    {
+     "text": "oic acid",
+     "role": "suffix",
+     "groupIds": [
+      "carboxylic-acid"
+     ],
+     "atoms": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "locants": {
+    "3": "1",
+    "4": "2",
+    "5": "3",
+    "6": "4",
+    "7": "5",
+    "8": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 15 15  0  0  0  0  0  0  0  0999 V2000\n   -3.4513    1.1610    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8828   -0.0580   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.5602   -1.0693   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4010   -0.0039    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7010    1.2093    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6957    1.2103   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3957    0.0037    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7034   -1.2070   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6928   -1.2124   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.4125    0.9692    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2330    2.1574    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2376    2.1530   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4832    0.0070    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2499   -2.1469   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2263   -2.1609   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  4  5  2  0\n  5  6  1  0\n  6  7  2  0\n  7  8  1  0\n  8  9  2  0\n  9  4  1  0\n  1 10  1  0\n  5 11  1  0\n  6 12  1  0\n  7 13  1  0\n  8 14  1  0\n  9 15  1  0\nM  END\n"
+  },
+  {
+   "id": "2-hydroxybenzoic-acid",
+   "name": "2-hydroxybenzoic acid",
+   "commonName": "salicylic acid",
+   "smiles": "OC(=O)c1ccccc1O",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "carboxylic-acid",
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "2-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "hydroxy",
+     "role": "substituent",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      9
+     ]
+    },
+    {
+     "text": "benz",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ]
+    },
+    {
+     "text": "oic acid",
+     "role": "suffix",
+     "groupIds": [
+      "carboxylic-acid"
+     ],
+     "atoms": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "atomFragment": [
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    3,
+    2,
+    2,
+    2,
+    2,
+    1
+   ],
+   "locants": {
+    "3": "1",
+    "8": "2",
+    "7": "3",
+    "6": "4",
+    "5": "5",
+    "4": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 16 16  0  0  0  0  0  0  0  0999 V2000\n   -3.4283   -1.2503    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8837   -0.0224   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.5713    0.9854   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4046   -0.0224   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6777   -1.2217    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7194   -1.1965    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3964    0.0228   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6801    1.2198    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7136    1.1978   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3347    2.4193   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.3957   -1.0921    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1885   -2.1816   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2796   -2.1286   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4836    0.0428   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2064    2.1709   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3065    2.2802   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  4  5  2  0\n  5  6  1  0\n  6  7  2  0\n  7  8  1  0\n  8  9  2  0\n  9 10  1  0\n  9  4  1  0\n  1 11  1  0\n  5 12  1  0\n  6 13  1  0\n  7 14  1  0\n  8 15  1  0\n 10 16  1  0\nM  END\n"
+  },
+  {
+   "id": "methyl-2-hydroxybenzoate",
+   "name": "methyl 2-hydroxybenzoate",
+   "commonName": "methyl salicylate (oil of wintergreen)",
+   "smiles": "COC(=O)c1ccccc1O",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "ester",
+    "alcohol"
+   ],
+   "fragments": [
+    {
+     "text": "methyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": " ",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "2-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "hydroxy",
+     "role": "substituent",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      10
+     ]
+    },
+    {
+     "text": "benz",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+     ]
+    },
+    {
+     "text": "oate",
+     "role": "suffix",
+     "groupIds": [
+      "ester"
+     ],
+     "atoms": [
+      1,
+      2,
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    5,
+    5,
+    5,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    0,
+    0,
+    0,
+    4,
+    4,
+    4,
+    4,
+    3
+   ],
+   "locants": {
+    "4": "1",
+    "9": "2",
+    "8": "3",
+    "7": "4",
+    "6": "5",
+    "5": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 19 19  0  0  0  0  0  0  0  0999 V2000\n   -4.9945   -0.3321    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.5853   -0.5664    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8377    0.5633   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2657    1.7100   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3840    0.2604    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9083   -1.0604    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4659   -1.3157   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3737   -0.2577    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.9114    1.0578    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4588    1.3157   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8180    2.6384   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.4991   -1.3021    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2920    0.2137   -0.9008 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2920    0.2137    0.9009 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5953   -1.9032   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8282   -2.3413   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4428   -0.4559    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6173    1.8845   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.7986    2.6981   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  3  5  1  0\n  5  6  2  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  2  0\n 10 11  1  0\n 10  5  1  0\n  1 12  1  0\n  1 13  1  0\n  1 14  1  0\n  6 15  1  0\n  7 16  1  0\n  8 17  1  0\n  9 18  1  0\n 11 19  1  0\nM  END\n"
+  },
+  {
+   "id": "2-ethanoyloxybenzoic-acid",
+   "name": "2-(ethanoyloxy)benzoic acid",
+   "commonName": "aspirin",
+   "smiles": "CC(=O)Oc1ccccc1C(=O)O",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "carboxylic-acid",
+    "ester",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "2-",
+     "role": "locant",
+     "groupIds": [
+      "ether-oxygen"
+     ],
+     "atoms": [],
+     "target": 4
+    },
+    {
+     "text": "(",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "ethan",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "oyl",
+     "role": "substituent",
+     "groupIds": [
+      "carbonyl"
+     ],
+     "atoms": [
+      1,
+      2
+     ]
+    },
+    {
+     "text": "oxy",
+     "role": "substituent",
+     "groupIds": [
+      "ether-oxygen"
+     ],
+     "atoms": [
+      3
+     ]
+    },
+    {
+     "text": ")",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "benz",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+     ]
+    },
+    {
+     "text": "oic acid",
+     "role": "suffix",
+     "groupIds": [
+      "carboxylic-acid"
+     ],
+     "atoms": [
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    3,
+    3,
+    4,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7,
+    2,
+    2,
+    2,
+    6,
+    6,
+    6,
+    6,
+    7
+   ],
+   "locants": {
+    "9": "1",
+    "4": "2",
+    "5": "3",
+    "6": "4",
+    "7": "5",
+    "8": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 21 21  0  0  0  0  0  0  0  0999 V2000\n   -4.8391    0.3435    1.0846 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.3522    0.2171    1.2309 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7720    0.0668    2.2985 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7660    0.3246   -0.0253 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3825    0.1262    0.0089 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5818    1.2729   -0.0053 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8058    1.1452   -0.0013 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3885   -0.1218    0.0043 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5847   -1.2666   -0.0008 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.8146   -1.1560   -0.0058 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6748   -2.3680   -0.0405 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8883   -2.4057   -0.1281 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9623   -3.5090    0.0327 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.3119    0.2009    2.0606 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.0910    1.3401    0.7140 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2126   -0.4266    0.4049 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0367    2.2595   -0.0106 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4338    2.0328   -0.0007 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.4716   -0.2212    0.0101 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0646   -2.2427   -0.0039 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6456   -4.2116    0.0170 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  4  5  1  0\n  5  6  2  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  2  0\n 10 11  1  0\n 11 12  2  0\n 11 13  1  0\n 10  5  1  0\n  1 14  1  0\n  1 15  1  0\n  1 16  1  0\n  6 17  1  0\n  7 18  1  0\n  8 19  1  0\n  9 20  1  0\n 13 21  1  0\nM  END\n"
+  },
+  {
+   "id": "4-aminobenzoic-acid",
+   "name": "4-aminobenzoic acid",
+   "commonName": "PABA",
+   "smiles": "Nc1ccc(cc1)C(=O)O",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "carboxylic-acid",
+    "amine"
+   ],
+   "fragments": [
+    {
+     "text": "4-",
+     "role": "locant",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "amino",
+     "role": "substituent",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "benz",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "text": "oic acid",
+     "role": "suffix",
+     "groupIds": [
+      "carboxylic-acid"
+     ],
+     "atoms": [
+      7,
+      8,
+      9
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    3
+   ],
+   "locants": {
+    "4": "1",
+    "3": "2",
+    "2": "3",
+    "1": "4",
+    "6": "5",
+    "5": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 17 17  0  0  0  0  0  0  0  0999 V2000\n    2.8014    0.0068    0.1092 N   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4095    0.0031   -0.0269 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.7017   -1.2008    0.0171 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6968   -1.2088    0.0027 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4056   -0.0033   -0.0128 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7040    1.2062    0.0029 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6952    1.2035    0.0170 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8872   -0.0566   -0.0247 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.5650   -1.0676   -0.0291 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4544    1.1629   -0.0338 O   0  0  0  0  0  0  0  0  0  0  0  0\n    3.2486    0.8504   -0.2359 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.2525   -0.8357   -0.2336 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2337   -2.1477    0.0628 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2276   -2.1585    0.0180 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2324    2.1560    0.0187 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2233    2.1526    0.0627 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.4158    0.9725   -0.0397 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  7  1  0\n  5  8  1  0\n  8  9  2  0\n  8 10  1  0\n  7  2  2  0\n  1 11  1  0\n  1 12  1  0\n  3 13  1  0\n  4 14  1  0\n  6 15  1  0\n  7 16  1  0\n 10 17  1  0\nM  END\n"
+  },
+  {
+   "id": "ethyl-4-aminobenzoate",
+   "name": "ethyl 4-aminobenzoate",
+   "commonName": "benzocaine",
+   "smiles": "CCOC(=O)c1ccc(N)cc1",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "ester",
+    "amine",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "ethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0,
+      1
+     ]
+    },
+    {
+     "text": " ",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "4-",
+     "role": "locant",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "amino",
+     "role": "substituent",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [
+      9
+     ]
+    },
+    {
+     "text": "benz",
+     "role": "parent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      5,
+      6,
+      7,
+      8,
+      10,
+      11
+     ]
+    },
+    {
+     "text": "oate",
+     "role": "suffix",
+     "groupIds": [
+      "ester"
+     ],
+     "atoms": [
+      2,
+      3,
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    0,
+    0,
+    5,
+    5,
+    5,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    4,
+    3,
+    3,
+    4,
+    4
+   ],
+   "locants": {
+    "5": "1",
+    "6": "2",
+    "7": "3",
+    "8": "4",
+    "10": "5",
+    "11": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 23 23  0  0  0  0  0  0  0  0999 V2000\n   -5.7705    1.3774   -0.0499 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.0070    0.0675   -0.0447 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.6061    0.3675   -0.0329 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8039   -0.7264   -0.0256 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1808   -1.8878   -0.0311 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3706   -0.3262   -0.0129 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9615    1.0122    0.0031 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4015    1.3302    0.0169 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3722    0.3263   -0.0270 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.7259    0.6492    0.1092 N   0  0  0  0  0  0  0  0  0  0  0  0\n    0.9591   -1.0072    0.0172 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4007   -1.3353    0.0027 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.5028    1.9760   -0.9270 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.8495    1.2002   -0.0590 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.5173    1.9746    0.8323 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2692   -0.5101    0.8489 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2544   -0.5087   -0.9433 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6883    1.8203    0.0192 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6983    2.3751    0.0627 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.9686    1.5722   -0.2367 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.3584   -0.0682   -0.2319 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6934   -1.8073    0.0630 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6972   -2.3823    0.0179 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  4  5  2  0\n  4  6  1  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  1  0\n  9 11  2  0\n 11 12  1  0\n 12  6  2  0\n  1 13  1  0\n  1 14  1  0\n  1 15  1  0\n  2 16  1  0\n  2 17  1  0\n  7 18  1  0\n  8 19  1  0\n 10 20  1  0\n 10 21  1  0\n 11 22  1  0\n 12 23  1  0\nM  END\n"
+  },
+  {
+   "id": "n-phenylethanamide",
+   "name": "N-phenylethanamide",
+   "commonName": "acetanilide",
+   "smiles": "CC(=O)Nc1ccccc1",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "amide"
+   ],
+   "fragments": [
+    {
+     "text": "N-",
+     "role": "locant",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "phenyl",
+     "role": "substituent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+     ]
+    },
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "amide",
+     "role": "suffix",
+     "groupIds": [
+      "amide"
+     ],
+     "atoms": [
+      1,
+      2,
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "0": "2",
+    "3": "N"
+   },
+   "molblock": "\n     RDKit          3D\n\n 19 19  0  0  0  0  0  0  0  0999 V2000\n    1.2275   -0.2591   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0545    0.5364    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0296    1.7616    0.0235 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1730   -0.2773   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.5259    0.1212    0.0031 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.9492    1.4512   -0.0053 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.3134    1.7614   -0.0025 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2653    0.7449    0.0084 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.8544   -0.5848    0.0162 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4916   -0.8946    0.0134 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.1356   -1.1491   -0.6293 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4698   -0.5554    1.0239 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0373    0.3569   -0.4014 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0088   -1.2756    0.0061 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.2431    2.2754   -0.0147 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6275    2.8022   -0.0089 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.3239    0.9906    0.0106 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.5936   -1.3815    0.0245 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1995   -1.9413    0.0196 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  4  5  1  0\n  5  6  2  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  2  0\n 10  5  1  0\n  1 11  1  0\n  1 12  1  0\n  1 13  1  0\n  4 14  1  0\n  6 15  1  0\n  7 16  1  0\n  8 17  1  0\n  9 18  1  0\n 10 19  1  0\nM  END\n"
+  },
+  {
+   "id": "n-4-hydroxyphenyl-ethanamide",
+   "name": "N-(4-hydroxyphenyl)ethanamide",
+   "commonName": "paracetamol (acetaminophen)",
+   "smiles": "CC(=O)Nc1ccc(O)cc1",
+   "tier": 5,
+   "tags": [
+    "aromatic",
+    "amide",
+    "alcohol",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "N-",
+     "role": "locant",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [],
+     "target": 4
+    },
+    {
+     "text": "(",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "4-",
+     "role": "locant",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "hydroxy",
+     "role": "substituent",
+     "groupIds": [
+      "hydroxyl"
+     ],
+     "atoms": [
+      8
+     ]
+    },
+    {
+     "text": "phenyl",
+     "role": "substituent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      10
+     ]
+    },
+    {
+     "text": ")",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      0
+     ]
+    },
+    {
+     "text": "amide",
+     "role": "suffix",
+     "groupIds": [
+      "amide"
+     ],
+     "atoms": [
+      1,
+      2,
+      3
+     ]
+    }
+   ],
+   "atomFragment": [
+    6,
+    7,
+    7,
+    7,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    4,
+    6,
+    6,
+    6,
+    7,
+    4,
+    4,
+    3,
+    4,
+    4
+   ],
+   "locants": {
+    "1": "1",
+    "0": "2",
+    "3": "N",
+    "4": "1",
+    "5": "2",
+    "6": "3",
+    "7": "4",
+    "9": "5",
+    "10": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 20 20  0  0  0  0  0  0  0  0999 V2000\n    1.2376   -0.2066   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0772    0.5333    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1056    1.7585    0.0236 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1604   -0.3267   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.5287    0.0146    0.0034 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4506   -1.0413    0.0137 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.8245   -0.7872    0.0168 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2801    0.5235    0.0094 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.6270    0.7297    0.0129 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.3830    1.5843   -0.0015 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0069    1.3274   -0.0047 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0192    0.4418   -0.4065 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4950   -0.4874    1.0246 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.1826   -1.1027   -0.6249 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9542   -1.3175    0.0059 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1171   -2.0753    0.0196 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.5347   -1.6090    0.0251 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.7920    1.6871    0.0080 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.7253    2.6144   -0.0077 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3338    2.1790   -0.0141 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  2  0\n  2  4  1  0\n  4  5  1  0\n  5  6  1  0\n  6  7  2  0\n  7  8  1  0\n  8  9  1  0\n  8 10  2  0\n 10 11  1  0\n 11  5  2  0\n  1 12  1  0\n  1 13  1  0\n  1 14  1  0\n  4 15  1  0\n  6 16  1  0\n  7 17  1  0\n  9 18  1  0\n 10 19  1  0\n 11 20  1  0\nM  END\n"
+  },
+  {
+   "id": "lidocaine",
+   "name": "2-(diethylamino)-N-(2,6-dimethylphenyl)ethanamide",
+   "commonName": "lidocaine",
+   "smiles": "CCN(CC)CC(=O)Nc1c(C)cccc1C",
+   "tier": 6,
+   "tags": [
+    "aromatic",
+    "amide",
+    "amine",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "2-",
+     "role": "locant",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "(",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "diethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0,
+      1,
+      3,
+      4
+     ]
+    },
+    {
+     "text": "amino",
+     "role": "substituent",
+     "groupIds": [
+      "amine"
+     ],
+     "atoms": [
+      2
+     ]
+    },
+    {
+     "text": ")",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "-N-",
+     "role": "locant",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [],
+     "target": 9
+    },
+    {
+     "text": "(",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "2,6-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 8
+    },
+    {
+     "text": "dimethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      11,
+      16
+     ]
+    },
+    {
+     "text": "phenyl",
+     "role": "substituent",
+     "groupIds": [
+      "aromatic"
+     ],
+     "atoms": [
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+     ]
+    },
+    {
+     "text": ")",
+     "role": "separator",
+     "groupIds": [],
+     "atoms": []
+    },
+    {
+     "text": "ethan",
+     "role": "parent",
+     "groupIds": [
+      "parent"
+     ],
+     "atoms": [
+      5
+     ]
+    },
+    {
+     "text": "amide",
+     "role": "suffix",
+     "groupIds": [
+      "amide"
+     ],
+     "atoms": [
+      6,
+      7,
+      8
+     ]
+    }
+   ],
+   "atomFragment": [
+    2,
+    2,
+    3,
+    2,
+    2,
+    11,
+    12,
+    12,
+    12,
+    9,
+    9,
+    8,
+    9,
+    9,
+    9,
+    9,
+    8,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    11,
+    11,
+    12,
+    8,
+    8,
+    8,
+    9,
+    9,
+    9,
+    8,
+    8,
+    8
+   ],
+   "locants": {
+    "6": "1",
+    "5": "2",
+    "8": "N",
+    "9": "1",
+    "10": "2",
+    "12": "3",
+    "13": "4",
+    "14": "5",
+    "15": "6"
+   },
+   "molblock": "\n     RDKit          3D\n\n 39 39  0  0  0  0  0  0  0  0999 V2000\n    1.6089   -1.6596    3.2567 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.5494   -0.4861    2.2829 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6169   -0.9077    0.8629 N   0  0  0  0  0  0  0  0  0  0  0  0\n    2.9759   -1.3708    0.5163 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.9987   -2.1660   -0.7866 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2422    0.2562    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2785    0.4740    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7562    1.6032   -0.0094 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9637   -0.7301    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3636   -0.9247   -0.0119 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8759   -1.9991    0.7591 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9878   -2.8970    1.5808 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.2619   -2.2235    0.8123 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.1390   -1.4129    0.1042 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6377   -0.3886   -0.6902 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2527   -0.1497   -0.7878 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8283    0.9061   -1.7728 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3709   -1.3140    4.2684 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8844   -2.4349    2.9895 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.6025   -2.1146    3.2956 H   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5951    0.0213    2.4705 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.3428    0.2342    2.5192 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.6806   -0.5316    0.4612 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.3564   -2.0497    1.2862 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.9940   -2.5963   -0.9409 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.7739   -1.5458   -1.6584 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2798   -2.9917   -0.7551 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.5077    0.0860   -1.0485 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7439    1.1739    0.3297 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.3828   -1.4743    0.3781 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2563   -3.4027    0.9425 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4719   -2.3128    2.3488 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.5621   -3.6767    2.0928 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6676   -3.0300    1.4192 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.2101   -1.5868    0.1582 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.3360    0.2201   -1.2619 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.5198    0.9365   -2.6234 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8337    1.8939   -1.3039 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.8454    0.6913   -2.2018 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  4  5  1  0\n  3  6  1  0\n  6  7  1  0\n  7  8  2  0\n  7  9  1  0\n  9 10  1  0\n 10 11  2  0\n 11 12  1  0\n 11 13  1  0\n 13 14  2  0\n 14 15  1  0\n 15 16  2  0\n 16 17  1  0\n 16 10  1  0\n  1 18  1  0\n  1 19  1  0\n  1 20  1  0\n  2 21  1  0\n  2 22  1  0\n  4 23  1  0\n  4 24  1  0\n  5 25  1  0\n  5 26  1  0\n  5 27  1  0\n  6 28  1  0\n  6 29  1  0\n  9 30  1  0\n 12 31  1  0\n 12 32  1  0\n 12 33  1  0\n 13 34  1  0\n 14 35  1  0\n 15 36  1  0\n 17 37  1  0\n 17 38  1  0\n 17 39  1  0\nM  END\n"
+  },
+  {
+   "id": "xanthine",
+   "name": "3,7-dihydro-1H-purine-2,6-dione",
+   "commonName": "xanthine",
+   "smiles": "O=c1[nH]c(=O)c2[nH]cnc2[nH]1",
+   "tier": 6,
+   "tags": [
+    "heteroaromatic",
+    "xanthine"
+   ],
+   "fragments": [
+    {
+     "text": "3,7-dihydro-1H-",
+     "role": "descriptor",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "purine",
+     "role": "parent",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    {
+     "text": "-2,6-",
+     "role": "locant",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "dione",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [
+      0,
+      1,
+      3,
+      4
+     ]
+    }
+   ],
+   "atomFragment": [
+    3,
+    3,
+    1,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "2": "1",
+    "1": "2",
+    "10": "3",
+    "9": "4",
+    "5": "5",
+    "3": "6",
+    "6": "7",
+    "7": "8",
+    "8": "9"
+   },
+   "molblock": "\n     RDKit          3D\n\n 15 16  0  0  0  0  0  0  0  0999 V2000\n   -3.3010    0.8962    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1646    0.4299   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.9562   -0.9368    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7353   -1.5822    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6234   -2.8018    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3557   -0.6731   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7043   -0.8688   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    2.2788    0.3797    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3739    1.3411    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1934    0.6791   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0500    1.2311   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.7804   -1.5165    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1845   -1.7598   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.3522    0.5201    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1440    2.2361   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2  3  1  0\n  3  4  1  0\n  4  5  2  0\n  4  6  1  0\n  6  7  1  0\n  7  8  1  0\n  8  9  2  0\n  9 10  1  0\n 10 11  1  0\n 11  2  1  0\n 10  6  2  0\n  3 12  1  0\n  7 13  1  0\n  8 14  1  0\n 11 15  1  0\nM  END\n"
+  },
+  {
+   "id": "theophylline",
+   "name": "1,3-dimethyl-3,7-dihydro-1H-purine-2,6-dione",
+   "commonName": "theophylline",
+   "smiles": "Cn1c(=O)c2[nH]cnc2n(C)c1=O",
+   "tier": 6,
+   "tags": [
+    "heteroaromatic",
+    "xanthine",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "1,3-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "dimethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0,
+      10
+     ]
+    },
+    {
+     "text": "-3,7-dihydro-1H-",
+     "role": "descriptor",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "purine",
+     "role": "parent",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+     ]
+    },
+    {
+     "text": "-2,6-",
+     "role": "locant",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [],
+     "target": 5
+    },
+    {
+     "text": "dione",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [
+      2,
+      3,
+      11,
+      12
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    3,
+    5,
+    5,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    1,
+    5,
+    5,
+    1,
+    1,
+    1,
+    3,
+    3,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "11": "2",
+    "9": "3",
+    "8": "4",
+    "4": "5",
+    "2": "6",
+    "5": "7",
+    "6": "8",
+    "7": "9"
+   },
+   "molblock": "\n     RDKit          3D\n\n 21 22  0  0  0  0  0  0  0  0999 V2000\n   -3.4508   -1.1179    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1210   -0.5410   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0268   -1.4096    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0966   -2.6341   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2127   -0.7232    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4915   -1.1972   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    2.3155   -0.1011   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6305    1.0257    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3271    0.6308    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.7784    1.4459   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6191    2.8884   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.0512    0.8697   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.0780    1.5552   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.9891   -0.7707   -0.8880 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.9891   -0.7708    0.8881 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4340   -2.2106   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    1.7703   -2.1702   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.3945   -0.1878   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0628    3.1864   -0.8944 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0628    3.1864    0.8944 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5825    3.4050   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  3  5  1  0\n  5  6  1  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  1  0\n 10 11  1  0\n 10 12  1  0\n 12 13  2  0\n 12  2  1  0\n  9  5  2  0\n  1 14  1  0\n  1 15  1  0\n  1 16  1  0\n  6 17  1  0\n  7 18  1  0\n 11 19  1  0\n 11 20  1  0\n 11 21  1  0\nM  END\n"
+  },
+  {
+   "id": "theobromine",
+   "name": "3,7-dimethyl-3,7-dihydro-1H-purine-2,6-dione",
+   "commonName": "theobromine",
+   "smiles": "Cn1cnc2c1c(=O)[nH]c(=O)n2C",
+   "tier": 6,
+   "tags": [
+    "heteroaromatic",
+    "xanthine",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "3,7-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "dimethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0,
+      12
+     ]
+    },
+    {
+     "text": "-3,7-dihydro-1H-",
+     "role": "descriptor",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "purine",
+     "role": "parent",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      8,
+      11
+     ]
+    },
+    {
+     "text": "-2,6-",
+     "role": "locant",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [],
+     "target": 5
+    },
+    {
+     "text": "dione",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [
+      6,
+      7,
+      9,
+      10
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    3,
+    3,
+    3,
+    3,
+    3,
+    5,
+    5,
+    3,
+    5,
+    5,
+    3,
+    1,
+    1,
+    1,
+    1,
+    3,
+    3,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "8": "1",
+    "9": "2",
+    "11": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "1": "7",
+    "2": "8",
+    "3": "9"
+   },
+   "molblock": "\n     RDKit          3D\n\n 21 22  0  0  0  0  0  0  0  0999 V2000\n    3.1331    0.6915   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.9137   -0.0756   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8139   -1.4424    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5563   -1.8404    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1645   -0.6851   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6418    0.4169   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.1318    1.7416   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8145    2.7593   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2449    1.7720    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1093    0.6909    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.3222    0.9020   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5388   -0.5780   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.3700   -1.7655   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    3.1536    1.3121   -0.8993 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.9904    0.0135    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.1536    1.3122    0.8992 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.6783   -2.0947    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6783    2.6815    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4338   -1.5133   -0.0001 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1495   -2.3565    0.8945 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1494   -2.3566   -0.8944 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  4  5  1  0\n  5  6  2  0\n  6  7  1  0\n  7  8  2  0\n  7  9  1  0\n  9 10  1  0\n 10 11  2  0\n 10 12  1  0\n 12 13  1  0\n  6  2  1  0\n 12  5  1  0\n  1 14  1  0\n  1 15  1  0\n  1 16  1  0\n  3 17  1  0\n  9 18  1  0\n 13 19  1  0\n 13 20  1  0\n 13 21  1  0\nM  END\n"
+  },
+  {
+   "id": "caffeine",
+   "name": "1,3,7-trimethyl-3,7-dihydro-1H-purine-2,6-dione",
+   "commonName": "caffeine",
+   "smiles": "Cn1c(=O)c2c(ncn2C)n(C)c1=O",
+   "tier": 6,
+   "tags": [
+    "heteroaromatic",
+    "xanthine",
+    "drug"
+   ],
+   "fragments": [
+    {
+     "text": "1,3,7-",
+     "role": "locant",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [],
+     "target": 1
+    },
+    {
+     "text": "trimethyl",
+     "role": "substituent",
+     "groupIds": [
+      "alkyl"
+     ],
+     "atoms": [
+      0,
+      9,
+      11
+     ]
+    },
+    {
+     "text": "-3,7-dihydro-1H-",
+     "role": "descriptor",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [],
+     "target": 3
+    },
+    {
+     "text": "purine",
+     "role": "parent",
+     "groupIds": [
+      "heteroaromatic"
+     ],
+     "atoms": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+     ]
+    },
+    {
+     "text": "-2,6-",
+     "role": "locant",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [],
+     "target": 5
+    },
+    {
+     "text": "dione",
+     "role": "suffix",
+     "groupIds": [
+      "carbonyl",
+      "carbonyl"
+     ],
+     "atoms": [
+      2,
+      3,
+      12,
+      13
+     ]
+    }
+   ],
+   "atomFragment": [
+    1,
+    3,
+    5,
+    5,
+    3,
+    3,
+    3,
+    3,
+    3,
+    1,
+    3,
+    1,
+    5,
+    5,
+    1,
+    1,
+    1,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "locants": {
+    "1": "1",
+    "12": "2",
+    "10": "3",
+    "5": "4",
+    "4": "5",
+    "2": "6",
+    "8": "7",
+    "7": "8",
+    "6": "9"
+   },
+   "molblock": "\n     RDKit          3D\n\n 24 25  0  0  0  0  0  0  0  0999 V2000\n   -2.6966   -2.4315    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.7163   -1.3635    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.3624   -1.7117    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0590   -2.8645    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.4967   -0.5797   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0406    0.7035    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0605    1.6065    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1525    0.8679    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8576   -0.4699   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8098   -1.5513   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3018    0.9955   -0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.7453    2.3775    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.2275   -0.0485   -0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4448    0.1586   -0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.2382   -3.4235    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.3296   -2.3333    0.8881 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.3297   -2.3333   -0.8880 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.1669    1.2469    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.6544   -2.1520    0.8996 H   0  0  0  0  0  0  0  0  0  0  0  0\n    2.6544   -2.1520   -0.8996 H   0  0  0  0  0  0  0  0  0  0  0  0\n    3.8241   -1.1439   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8356    2.4560   -0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3593    2.8767    0.8944 H   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3592    2.8767   -0.8944 H   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  2  0\n  3  5  1  0\n  5  6  2  0\n  6  7  1  0\n  7  8  2  0\n  8  9  1  0\n  9 10  1  0\n  6 11  1  0\n 11 12  1  0\n 11 13  1  0\n 13 14  2  0\n 13  2  1  0\n  9  5  1  0\n  1 15  1  0\n  1 16  1  0\n  1 17  1  0\n  8 18  1  0\n 10 19  1  0\n 10 20  1  0\n 10 21  1  0\n 12 22  1  0\n 12 23  1  0\n 12 24  1  0\nM  END\n"
+  }
+ ]
+}
