@@ -35,6 +35,21 @@ const typeName = async (m) => {
 await page.goto('http://localhost:4174/');
 await page.waitForTimeout(800);
 
+// title screen: plays itself, records nothing, any typing key or a card starts the game
+ok(await page.isVisible('#title-menu'), 'opens on the title screen');
+ok((await page.locator('.tcard').count()) === DATA.playlists.length, 'one card per playlist');
+await page.waitForTimeout(1200);
+ok((await page.locator('#name .ch.done').count()) > 0, 'the demo types by itself');
+await page.keyboard.press('Enter');
+ok(!(await page.isVisible('#title-menu')) && (await page.isVisible('#keyboard')), 'Enter starts Zen');
+ok((await page.innerText('#session')).includes('0:00'), 'demo typing is not counted in the session');
+await realClick('#brand');
+ok(await page.isVisible('#title-menu'), 'the wordmark returns to the title screen');
+await realClick('.tcard:nth-child(2)');
+ok((await page.inputValue('#playlist')) === DATA.playlists[1].id && !(await page.isVisible('#title-menu')), 'a playlist card starts that playlist');
+await realClick('#brand');
+await realClick('.tcard:nth-child(1)');
+
 // typing: wrong key does not advance, clean name finishes
 let m = await cur();
 await page.keyboard.press('~');

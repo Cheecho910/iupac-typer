@@ -41,7 +41,7 @@ const now = () => performance.now();
 
 // ---------------------------------------------------------------- state
 
-let mode = 'zen'; // zen | sprint | explore
+let mode = 'title'; // title | zen | sprint | explore
 let mol = null;
 let run = null;
 let level = 1;
@@ -85,7 +85,7 @@ function startMolecule(m) {
   if (run && !tallied && run.startedAt != null) session = addToTally(session, stats(run, now())); // abandoned run
   tallied = false;
   mol = m;
-  level = mode === 'explore' ? 0 : (store.mastery[m.id]?.level ?? 1);
+  level = mode === 'explore' ? 0 : mode === 'title' ? 1 : (store.mastery[m.id]?.level ?? 1);
   run = createRun(m.fragments, { autoPunct: S.autoPunct });
   finished = false;
   practice = S.showName;
@@ -156,15 +156,20 @@ function handleChar(key) {
   run = r.state;
   if (r.result !== 'ignored') flashKey(key, r.result === 'error');
   if (r.result === 'error') flashError();
-  for (const f of r.completed) {
+  celebrate(r.completed);
+  if (r.result === 'done') finish(false);
+  else render();
+}
+
+/** A fragment was just completed: its atoms pulse and its token pops. */
+function celebrate(completed) {
+  for (const f of completed) {
     if (mol.fragments[f].atoms.length) viewer.pulse(f);
     const tok = tokEls[f];
     tok.classList.remove('pop');
     void tok.offsetWidth; // restart the animation
     tok.classList.add('pop');
   }
-  if (r.result === 'done') finish(false);
-  else render();
 }
 
 function doHint() {
@@ -183,6 +188,10 @@ function flashError() {
 
 /** One entry point for physical and on-screen keys. Returns true if the key was used. */
 function handleKey(key) {
+  if (mode === 'title') {
+    if (key === 'Enter' || key.length === 1) setMode('zen'); // any typing key starts; the key itself is not counted
+    return key !== 'Tab';
+  }
   if (key === 'Escape') return (panel ? closePanel() : openPanel('menu'), true);
   if (panel === 'sprint-end' && key === 'Enter') return (setMode('sprint'), true);
   if (panel || mode === 'explore') return false;
@@ -239,7 +248,7 @@ function flashKey(k, bad) {
 
 function renderKeyboard() {
   const kb = $('#keyboard');
-  kb.hidden = !S.keyboard || mode === 'explore';
+  kb.hidden = !S.keyboard || mode === 'explore' || mode === 'title';
   $('#keys').hidden = !kb.hidden;
   if (kb.hidden) return;
   // Light the next key only when that character is on screen anyway;
@@ -418,7 +427,58 @@ function renderSprint() {
   );
 }
 
+// ---------------------------------------------------------------- title screen
+// Attract mode: the game plays itself (a name types out, atoms pulse) above
+// the playlist cards. Nothing typed here is recorded.
+
+let demoTimer = 0;
+
+function startDemo() {
+  const options = MOLS.filter((m) => m !== mol && m.fragments.length >= 3 && m.name.length <= 30);
+  startMolecule(options[Math.floor(Math.random() * options.length)]);
+  tallied = true; // never counts toward the session
+}
+
+function demoStep() {
+  if (mode !== 'title' || finished) return;
+  const r = press(run, run.chars[run.pos].ch, now());
+  run = r.state;
+  celebrate(r.completed);
+  if (r.result === 'done') {
+    finished = true;
+    setTimeout(() => mode === 'title' && startDemo(), 1700);
+  }
+  renderName();
+}
+
+function renderTitle() {
+  const box = $('#title-menu');
+  box.hidden = mode !== 'title';
+  if (box.hidden) return;
+  const total = MOLS.length;
+  const mastered = MOLS.filter((m) => isMastered(store.mastery[m.id])).length;
+  box.replaceChildren(
+    h('div', { class: 'tcards' }, PLAYLISTS.map((p, i) => {
+      const passed = p.molecules.filter((id) => (store.mastery[id]?.level ?? 1) >= 2).length;
+      return h('button', {
+        type: 'button', class: 'tcard', 'aria-pressed': String(p.id === playlist().id),
+        onclick: () => ((S.playlist = p.id), save(store), ($('#playlist').value = p.id), setMode('zen')),
+      },
+        h('span', { class: 'num' }, String(i + 1).padStart(2, '0')),
+        h('b', {}, p.name),
+        h('span', { class: 'meta' }, `${p.molecules.length} molecules${passed ? ` · ${passed} past Copy` : ''}`),
+        h('i', { class: 'bar-fill', style: `--p:${(passed / p.molecules.length) * 100}%` }));
+    })),
+    h('div', { class: 'row tactions' },
+      h('button', { type: 'button', class: 'primary', onclick: () => setMode('zen') }, `Play ${playlist().name} `, h('kbd', {}, 'Enter')),
+      h('button', { type: 'button', onclick: () => setMode('sprint') }, 'Sprint · 60 s'),
+      h('button', { type: 'button', onclick: () => setMode('explore') }, 'Explore'),
+      h('span', { class: 'note' }, `${mastered} of ${total} mastered`)),
+  );
+}
+
 function render() {
+  renderTitle();
   renderName();
   renderHud();
   renderSession();
@@ -437,12 +497,14 @@ setInterval(() => {
 
 function setMode(m) {
   closePanel(true);
+  clearInterval(demoTimer);
   mode = m;
   sprint = m === 'sprint' ? { endsAt: null, score: 0, combo: 0, maxCombo: 0, cleared: 0, correct: 0, wrong: 0, frag: new Map() } : null;
   for (const b of $('#modes').children) b.setAttribute('aria-pressed', String(b.dataset.mode === m));
   $('#explore-list').hidden = m !== 'explore';
   document.body.dataset.mode = m;
-  if (m === 'explore') startMolecule(mol && playlist().molecules.includes(mol.id) ? mol : playlistMols()[0]);
+  if (m === 'title') (startDemo(), (demoTimer = setInterval(demoStep, 115)));
+  else if (m === 'explore') startMolecule(mol && playlist().molecules.includes(mol.id) ? mol : playlistMols()[0]);
   else next();
   renderExploreList();
   viewer.resize();
@@ -581,6 +643,7 @@ function menuContent() {
       h('button', { type: 'button', onclick: () => setMode('sprint') }, 'Sprint'),
       h('button', { type: 'button', onclick: () => setMode('explore') }, 'Explore'),
       h('button', { type: 'button', onclick: () => (closePanel(true), openPanel('settings')) }, 'Settings'),
+      h('button', { type: 'button', onclick: () => setMode('title') }, 'Title screen'),
     ),
     h('dl', { class: 'facts' },
       h('dt', {}, 'Graded'), h('dd', {}, line(g)),
@@ -751,6 +814,7 @@ function syncButtons() {
   viewer.setOptions({ style: S.style, locants: S.locants, badges: S.badges, wiggle: S.wiggle });
 }
 
+$('#brand').addEventListener('click', () => setMode('title'));
 $('#modes').addEventListener('click', (e) => e.target.dataset.mode && setMode(e.target.dataset.mode));
 $('#styles').addEventListener('click', (e) => {
   if (!e.target.dataset.style) return;
@@ -786,4 +850,4 @@ window.iupacDebug = { wiggle: () => viewer.wiggleNow() }; // used by tests/e2e
 
 buildKeyboard();
 syncButtons();
-setMode('zen');
+setMode('title');

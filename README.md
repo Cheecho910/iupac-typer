@@ -244,6 +244,10 @@ Game
 - **Session row** is muted, not red: red is the error flash and sits next to
   the carbonyl color. One line to change: `--session` in `src/style.css`.
 - **Long names** shrink to fit one line (down to 14 px, then wrap).
+- **Title screen**: the page opens on it. The game plays itself (nothing is
+  recorded), with one card per playlist. Any typing key or Enter starts Zen;
+  the wordmark in the top bar returns to it.
+- **On-screen keyboard** is a rectangle: every row spans the full width.
 - **Common name** sits directly above the name you type.
 - **End-group motion**: every few seconds one end group moves. A group that is
   one heavy atom plus hydrogens (CH3, OH, NH2) spins a full turn about its

@@ -12,7 +12,8 @@
 <body>
   <div id="app">
     <header class="bar">
-      <h1 class="brand">IUPAC<span>typer</span></h1>
+      <h1 class="brand"><button type="button" id="brand" title="Title screen">IUPAC<span>typer</span></button></h1>
+      <p id="tagline">Type the name. The atoms answer.</p>
       <nav class="seg" id="modes" aria-label="Mode">
         <button type="button" data-mode="zen">Zen</button>
         <button type="button" data-mode="sprint">Sprint</button>
@@ -51,6 +52,7 @@
         <section class="type" aria-label="Name">
           <p id="common"></p>
           <div id="name" role="img"></div>
+          <div id="title-menu" hidden></div>
           <div id="hud"></div>
           <div id="session"></div>
           <p id="keys"></p>
