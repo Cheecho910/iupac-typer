@@ -63,13 +63,31 @@ export function deltaE(a, b) {
 /** [{id,...}] -> {id: group} */
 export const indexGroups = (list) => Object.fromEntries(list.map((g) => [g.id, g]));
 
+/** The registry as seen in one theme: `color` becomes the light-theme color where there is one. */
+export const themed = (groups, theme) =>
+  Object.fromEntries(Object.entries(groups).map(([id, g]) => [id, theme === 'light' && g.colorLight ? { ...g, color: g.colorLight } : g]));
+
+/** A dark-theme color re-pitched for a light background: same hue, lower lightness. */
+export function forLight(hex) {
+  const [L, a, bb] = hexToOklab(hex);
+  return oklabToHex([0.26 + 0.42 * L, a, bb]);
+}
+
+/** A preset ({baseGroupId: hex}, dark-theme values) as a full set of pins: composites follow their recipe. */
+export function presetPins(colors, groups, theme) {
+  const base = Object.fromEntries(Object.entries(colors).map(([id, hex]) => [id, theme === 'light' ? forLight(hex) : hex.toLowerCase()]));
+  const pins = { ...base };
+  for (const id of ownColorIds(groups)) if (groups[id].recipe) pins[id] = blend(resolveRecipe(id, groups).map((r) => base[r]));
+  return pins;
+}
+
 /** Composite -> flat list of base group ids. */
 export function resolveRecipe(id, groups) {
   const g = groups[id];
   return g.recipe ? g.recipe.flatMap((r) => resolveRecipe(r, groups)) : [id];
 }
 
-/** A group's color: user pin > own color > blend of its recipe. */
+/** A group's color: user pin > its own default > OKLab blend of its recipe. */
 export function groupColor(id, groups, pins = {}) {
   const g = groups[id];
   if (g.alias) return groupColor(g.alias, groups, pins); // shares another group's color

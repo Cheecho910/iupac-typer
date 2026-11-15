@@ -1,21 +1,22 @@
 {
-  "_note": "Default colors were searched to maximise the smallest pairwise OKLab deltaE across all 13 colors (blends included) under normal, protan, deutan and tritan vision; tests/color.test.js enforces the floor. 'elements' is the heavy-atom composition a fragment of this group must own: int = exact, 'N+' = at least N, X = any halogen. Composites take theirs from the recipe. 'alias' = shares another group's color (no new color to keep distinct).",
+  "_note": "Colors follow drawing-program conventions: oxygen groups red/orange/pink, nitrogen blue, halogens green, carbon skeleton grey; amide is purple (carbonyl + amine). 'color' is for the dark theme, 'colorLight' for the light theme. Both sets were searched inside those hue ranges to maximise the smallest pairwise OKLab deltaE; tests/color.test.js enforces the floors. Composites keep 'recipe' (what they are made of) and get their own default color; without one they would be the OKLab average of the recipe. 'presets' are alternative palettes offered in Settings. 'elements' is the heavy-atom composition a fragment of this group must own: int = exact, 'N+' = at least N, X = any halogen; composites take theirs from the recipe. 'alias' = shares another group's color.",
   "groups": [
-    { "id": "parent",          "name": "Parent chain",    "color": "#98A0AA", "priority": 0,  "elements": { "C": "0+" } },
-    { "id": "alkyl",           "name": "Alkyl",           "color": "#CEDFF4", "priority": 10, "elements": { "C": "1+" } },
-    { "id": "aromatic",        "name": "Aromatic ring",   "color": "#3697E0", "priority": 20, "elements": { "C": 6 } },
-    { "id": "heteroaromatic",  "name": "Heteroaromatic ring", "alias": "aromatic", "priority": 20, "elements": { "C": "1+", "N": "0+", "O": "0+", "S": "0+" } },
-    { "id": "heterocycle",     "name": "Saturated heterocycle", "alias": "parent",   "priority": 0,  "elements": { "C": "1+", "N": "0+", "O": "0+", "S": "0+" } },
-    { "id": "oxo",             "name": "Oxo",                   "alias": "carbonyl", "priority": 70, "elements": { "O": 1 } },
-    { "id": "alkene",          "name": "Alkene",          "color": "#B9FCC8", "priority": 30, "elements": { "C": 2 } },
-    { "id": "alkyne",          "name": "Alkyne",          "color": "#BFD228", "priority": 30, "elements": { "C": 2 } },
-    { "id": "halide",          "name": "Halide",          "color": "#65C009", "priority": 40, "elements": { "X": 1 } },
-    { "id": "ether-oxygen",    "name": "Ether oxygen",    "color": "#A8945D", "priority": 50, "elements": { "O": 1 } },
-    { "id": "amine",           "name": "Amine",           "color": "#79ACFD", "priority": 50, "elements": { "N": 1 } },
-    { "id": "hydroxyl",        "name": "Hydroxyl",        "color": "#E4F93D", "priority": 60, "elements": { "O": 1 } },
-    { "id": "carbonyl",        "name": "Carbonyl",        "color": "#FAB9AC", "priority": 70, "elements": { "C": 1, "O": 1 } },
-    { "id": "carboxylic-acid", "name": "Carboxylic acid", "priority": 80, "recipe": ["carbonyl", "hydroxyl"] },
-    { "id": "ester",           "name": "Ester",           "priority": 80, "recipe": ["carbonyl", "ether-oxygen"] },
-    { "id": "amide",           "name": "Amide",           "priority": 80, "recipe": ["carbonyl", "amine"] }
-  ]
+    {"id": "parent", "name": "Parent chain", "color": "#9aa0a7", "priority": 0, "elements": {"C": "0+"}, "colorLight": "#6f757c"},
+    {"id": "alkyl", "name": "Alkyl", "color": "#f1e2cb", "priority": 10, "elements": {"C": "1+"}, "colorLight": "#594c3c"},
+    {"id": "aromatic", "name": "Aromatic ring", "color": "#bdc4fa", "priority": 20, "elements": {"C": 6}, "colorLight": "#554d81"},
+    {"id": "heteroaromatic", "name": "Heteroaromatic ring", "alias": "aromatic", "priority": 20, "elements": {"C": "1+", "N": "0+", "O": "0+", "S": "0+"}},
+    {"id": "heterocycle", "name": "Saturated heterocycle", "alias": "parent", "priority": 0, "elements": {"C": "1+", "N": "0+", "O": "0+", "S": "0+"}},
+    {"id": "oxo", "name": "Oxo", "alias": "carbonyl", "priority": 70, "elements": {"O": 1}},
+    {"id": "alkene", "name": "Alkene", "color": "#d5ca53", "priority": 30, "elements": {"C": 2}, "colorLight": "#ac9100"},
+    {"id": "alkyne", "name": "Alkyne", "color": "#4dcfcf", "priority": 30, "elements": {"C": 2}, "colorLight": "#3fa9b3"},
+    {"id": "halide", "name": "Halide", "color": "#66b763", "priority": 40, "elements": {"X": 1}, "colorLight": "#5cae5d"},
+    {"id": "ether-oxygen", "name": "Ether oxygen", "color": "#d54d95", "priority": 50, "elements": {"O": 1}, "colorLight": "#c75999"},
+    {"id": "amine", "name": "Amine", "color": "#6096ed", "priority": 50, "elements": {"N": 1}, "colorLight": "#0b74eb"},
+    {"id": "hydroxyl", "name": "Hydroxyl", "color": "#fe2725", "priority": 60, "elements": {"O": 1}, "colorLight": "#e13b42"},
+    {"id": "carbonyl", "name": "Carbonyl", "color": "#f38e0d", "priority": 70, "elements": {"C": 1, "O": 1}, "colorLight": "#a65f13"},
+    {"id": "carboxylic-acid", "name": "Carboxylic acid", "priority": 80, "recipe": ["carbonyl", "hydroxyl"], "color": "#bb7153", "colorLight": "#960d06"},
+    {"id": "ester", "name": "Ester", "priority": 80, "recipe": ["carbonyl", "ether-oxygen"], "color": "#f5a5a6", "colorLight": "#9f475d"},
+    {"id": "amide", "name": "Amide", "priority": 80, "recipe": ["carbonyl", "amine"], "color": "#a651fa", "colorLight": "#6b16a5"}
+  ],
+  "presets": {"colorblind": {"name": "Colorblind-safe", "note": "Searched for the largest separation under protan, deutan and tritan vision; ignores element conventions. Blends follow their recipe.", "colors": {"parent": "#98a0aa", "alkyl": "#cedff4", "aromatic": "#3697e0", "alkene": "#b9fcc8", "alkyne": "#bfd228", "halide": "#65c009", "ether-oxygen": "#a8945d", "amine": "#79acfd", "hydroxyl": "#e4f93d", "carbonyl": "#fab9ac"}}}
 }

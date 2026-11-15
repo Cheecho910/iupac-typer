@@ -13,15 +13,23 @@ export const defaults = () => ({
     locants: true,
     badges: true,
     style: 'ball', // ball | space | wire
+    theme: 'dark', // dark | light
+    legend: true, // color key beside the molecule
     wiggle: true, // end groups spin/wag now and then
     keyboard: true, // on-screen keyboard under the name
     playlist: 'foundations',
     ramp: true, // unlock a playlist's molecules in order
   },
-  pins: {}, // groupId -> hex: explicit user colors
+  pins: { dark: {}, light: {} }, // per theme: groupId -> hex, explicit user colors
   mastery: {}, // moleculeId -> { level, streak, runs, acc }
   stats: { graded: zero(), practice: zero(), fragErrors: {}, sprintBest: 0 },
 });
+
+/** Before themes, pins were one flat {groupId: hex} map; those belonged to the dark theme. */
+function migratePins(pins = {}) {
+  const flat = Object.keys(pins).some((k) => k !== 'dark' && k !== 'light');
+  return flat ? { dark: { ...pins }, light: {} } : { dark: { ...pins.dark }, light: { ...pins.light } };
+}
 
 export function load() {
   const base = defaults();
@@ -29,7 +37,7 @@ export function load() {
     const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
     return {
       settings: { ...base.settings, ...saved.settings },
-      pins: { ...saved.pins },
+      pins: migratePins(saved.pins),
       mastery: { ...saved.mastery },
       stats: { ...base.stats, ...saved.stats },
     };

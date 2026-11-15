@@ -15,7 +15,8 @@ const WAG_DEG = 30;
 const DOUBLE_BOND = 0.7; // 3Dmol default 0.4: each line of a double bond, relative to a single bond
 const TRIPLE_BOND = 0.45; // default 0.25
 
-export function createViewer(el, { background, neutral, text }) {
+export function createViewer(el, theme) {
+  let { background, neutral, text } = theme;
   const viewer = $3Dmol.createViewer(el, { backgroundColor: background, antialias: true });
   viewer.setHoverDuration(40);
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -179,7 +180,9 @@ export function createViewer(el, { background, neutral, text }) {
       const frag = mol.atomFragment[a.index];
       const base = colors[frag] ?? neutral;
       const dimmed = highlight != null && frag !== highlight;
-      const ink = hexToOklab(base)[0] > 0.6 ? background : text;
+      // dark ink on light atoms, light ink on dark atoms, whichever theme is on
+      const [darkInk, lightInk] = hexToOklab(background)[0] < hexToOklab(text)[0] ? [background, text] : [text, background];
+      const ink = hexToOklab(base)[0] > 0.6 ? darkInk : lightInk;
       viewer.addLabel(`${el ?? ''}${loc ?? ''}`, {
         position: { x: a.x, y: a.y, z: a.z },
         inFront: true, alignment: 'center', bold: true, font: 'ui-monospace, Menlo, Consolas, monospace',
@@ -230,6 +233,12 @@ export function createViewer(el, { background, neutral, text }) {
       moved = false;
       fit(); // face-on, as oriented by the build
       viewer.render();
+    },
+    setTheme(next) {
+      ({ background, neutral, text } = next);
+      viewer.setBackgroundColor(background);
+      dirty = true;
+      relabel();
     },
     setColors(fragColors) {
       colors = fragColors;

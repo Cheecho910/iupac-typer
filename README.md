@@ -260,11 +260,31 @@ Game
 - **deltaE warning** fires under 8 (OKLab distance x100) for any two of the 13
   colors, derived blends included; the panel can also check simulated
   protanopia, deuteranopia and tritanopia.
-- **Default palette** was searched to maximise the smallest pairwise distance
-  across all four vision types. Achieved floors, enforced by tests: 9 normal,
-  7 protan, 7 deutan, 4.5 tritan. Thirteen colors that stay far apart for
-  dichromats is not achievable, so the element badges and the text itself are
-  the non-color cues.
+- **Default palette** follows drawing-program conventions: oxygen groups red
+  (hydroxyl), orange (carbonyl) and pink (ether oxygen, ester); nitrogen blue;
+  halogens green; the carbon skeleton grey; amide purple, as carbonyl plus
+  amine. Each theme has its own set (`color`, `colorLight` in `groups.json`),
+  searched inside those hue ranges for the largest separation. Floors enforced
+  by tests, both themes: 11 normal, 5 protan, 5 deutan, 3 tritan. Convention
+  costs colorblind separation: five oxygen groups share the red end.
+- **Colorblind-safe preset** (Settings) is the earlier convention-free palette:
+  9 normal, 7 protan, 7 deutan, 4.5 tritan.
+- **Composites have their own default color** now (they were pure blends).
+  `recipe` still says what they are made of; a composite with no color falls
+  back to the blend.
+- **Themes**: dark (default) and light (warm paper), toggled in the top bar.
+  Your own colors are kept per theme.
+- **Type**: Newsreader, an old-style serif in the Garamond line but heavier,
+  for everything you read; Martian Mono for everything you type.
+- **Color key** beside the molecule lists all 13 colors and lights the ones in
+  the current molecule. Toggle "Color key".
+- **Level pips and clean-run ticks** sit top-left during play; a level change
+  gets one large moment on the stage; fragments you slipped on are marked
+  with a red count when the run ends.
+- **Session stats** show between molecules and in the pause menu, not while
+  typing.
+- **Spacefill and wireframe** moved into Settings.
+- **Explore** has a search box (name or common name, within the playlist).
 - **Group `priority`** ("atom claimed twice") is carried in the registry but
   unused at runtime: the build guarantees every atom has exactly one owner.
 - **Touch**: 3D rotation works, and the on-screen keyboard types.

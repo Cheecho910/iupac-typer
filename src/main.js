@@ -4,7 +4,7 @@
 import data from '../public/molecules.json';
 import registry from '../data/groups.json';
 import { createRun, press, hint, stats, isDone, isPunct, shiftClock, emptyTally, addToTally, tallyStats } from './engine.js';
-import { indexGroups, fragmentColor, groupColor, closePairs, ownColorIds, WARN_DELTA_E, VISIONS } from './color.js';
+import { indexGroups, themed, presetPins, fragmentColor, groupColor, closePairs, ownColorIds, WARN_DELTA_E, VISIONS } from './color.js';
 import { newRecord, applyRun, pick, isClean, isMastered, unlockedCount, RAMP_WINDOW } from './mastery.js';
 import { load, save, defaults } from './storage.js';
 import { createViewer } from './viewer.js';
@@ -13,7 +13,8 @@ import './style.css';
 const MOLS = data.molecules;
 const BY_ID = Object.fromEntries(MOLS.map((m) => [m.id, m]));
 const PLAYLISTS = data.playlists;
-const GROUPS = indexGroups(registry.groups);
+const ALL_GROUPS = indexGroups(registry.groups);
+const PRESETS = registry.presets ?? {};
 const LEVELS = { 1: 'Copy', 2: 'Slots', 3: 'Recall' };
 const SPRINT_MS = 60_000;
 const MAX_COMBO = 5;
@@ -21,6 +22,9 @@ const NBSP = ' ';
 
 const store = load();
 const S = store.settings;
+document.documentElement.dataset.theme = S.theme;
+let GROUPS = themed(ALL_GROUPS, S.theme); // the registry with this theme's colors
+const pins = () => store.pins[S.theme]; // the player's own colors for this theme
 
 const $ = (sel) => document.querySelector(sel);
 const h = (tag, attrs = {}, ...kids) => {
@@ -61,7 +65,7 @@ let tallied = false; // current run already added to the session
 
 const viewer = createViewer($('#viewer'), { background: css('--ink'), neutral: css('--muted'), text: css('--text') });
 
-const fragColors = () => mol.fragments.map((f) => fragmentColor(f.groupIds, GROUPS, store.pins));
+const fragColors = () => mol.fragments.map((f) => fragmentColor(f.groupIds, GROUPS, pins()));
 const typing = () => mode !== 'explore' && !finished && !panel;
 /** Atoms a token stands for: its own, or for a locant/descriptor the fragment it points at. */
 const targetOf = (f) => {
@@ -93,6 +97,7 @@ function startMolecule(m) {
   hot = null;
   colors = fragColors();
   viewer.load(m, colors);
+  if (mode === 'title') $('#toast').hidden = true;
   $('#viewer').dataset.mol = m.id; // for end-to-end tests
   buildName();
   render();
@@ -142,6 +147,13 @@ function finish(skipped) {
   if (skipped) return next();
   finished = true;
   result = { st, change, unlocked };
+  st.errors.forEach((n, f) => n && (tokEls[f].dataset.miss = n)); // which fragments cost you
+  const rec = store.mastery[mol.id];
+  if (!practice && (change || (isMastered(rec) && rec.streak === 2))) {
+    const text = change > 0 ? `Level ${rec.level} · ${LEVELS[rec.level]}` : change < 0 ? `Back to level ${rec.level}` : 'Mastered';
+    toast(text, change < 0 ? 'down' : 'up');
+    if (change >= 0) mol.fragments.forEach((f, i) => f.atoms.length && viewer.pulse(i));
+  }
   if (mode === 'sprint') advancing = setTimeout(next, 340); // let the last pulse land
   render();
 }
@@ -177,6 +189,18 @@ function doHint() {
   if (!typing() || level === 1 || S.showName) return;
   run = hint(run).state;
   render();
+}
+
+let toastTimer = 0;
+function toast(text, kind) {
+  const el = $('#toast');
+  el.className = kind;
+  el.textContent = text;
+  el.hidden = false;
+  void el.offsetWidth; // restart the animation
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => (el.hidden = true), 1700);
 }
 
 function flashError() {
@@ -352,13 +376,23 @@ function renderHud() {
   chip.classList.toggle('practice', mode !== 'explore' && S.showName);
 
   if (mode === 'explore') {
-    chip.textContent = rec ? `Level ${rec.level} · ${LEVELS[rec.level]}${isMastered(rec) ? ' · mastered' : ''}` : 'Not played yet';
+    chip.replaceChildren(rec ? `Level ${rec.level} · ${LEVELS[rec.level]}${isMastered(rec) ? ' · mastered' : ''}` : 'Not played yet');
     hud.append(h('span', { class: 'note' }, 'Hover a part of the name or an atom to see what it stands for.'));
     $('#keys').textContent = '';
     return;
   }
 
-  chip.textContent = S.showName ? 'Practice · not graded' : `Level ${level} · ${LEVELS[level]}`;
+  // level as three pips, clean-run streak as two ticks: two clean runs promote
+  const streak = store.mastery[mol.id]?.streak ?? 0;
+  const lv = store.mastery[mol.id]?.level ?? 1;
+  chip.replaceChildren(...(S.showName
+    ? ['Practice · not graded']
+    : [
+        h('span', { class: 'pips', title: `Level ${lv} of 3` }, [1, 2, 3].map((n) => h('i', { class: n <= lv ? 'on' : '' }))),
+        `Level ${level} · ${LEVELS[level]}`,
+        h('span', { class: 'ticks', title: `${Math.min(streak, 2)} of 2 clean runs toward the next level` },
+          [1, 2].map((n) => h('i', { class: n <= streak ? 'on' : '' })), ' clean'),
+      ]));
   const st = result?.st ?? stats(run, now());
   const stat = (label, value) => h('span', { class: 'stat' }, h('b', {}, value), ` ${label}`);
   hud.append(stat('accuracy', pct(st.accuracy)), stat('wpm', String(Math.round(st.wpm))), stat('time', clock(st.ms)));
@@ -392,10 +426,21 @@ function renderHud() {
   );
 }
 
+/** Color key: every group color; the ones in this molecule are lit. */
+function renderLegend() {
+  const el = $('#legend');
+  el.hidden = !S.legend || mode === 'title';
+  if (el.hidden) return;
+  const own = (id) => ALL_GROUPS[id].alias ?? id;
+  const present = new Set(mol.fragments.filter((f) => f.atoms?.length).flatMap((f) => f.groupIds.map(own)));
+  el.replaceChildren(...ownColorIds(GROUPS).map((id) =>
+    h('li', { class: present.has(id) ? 'on' : '' }, h('i', { style: `background:${groupColor(id, GROUPS, pins())}` }), GROUPS[id].name)));
+}
+
 /** Second HUD row: everything typed since the page loaded, live. */
 function renderSession() {
   const el = $('#session');
-  el.hidden = mode === 'explore';
+  el.hidden = mode !== 'zen' || !finished; // between molecules only; always in the pause menu
   if (el.hidden) return;
   const t = tallied || !run ? session : addToTally(session, stats(run, now()));
   const st = tallyStats(t);
@@ -485,6 +530,7 @@ function render() {
   renderCommon();
   renderSprint();
   renderKeyboard();
+  renderLegend();
 }
 
 setInterval(() => {
@@ -546,7 +592,7 @@ function worstList(entries, title) {
   const colorOf = (text) => {
     for (const m of MOLS) {
       const f = m.fragments.find((x) => x.text === text);
-      if (f) return fragmentColor(f.groupIds, GROUPS, store.pins) ?? css('--muted');
+      if (f) return fragmentColor(f.groupIds, GROUPS, pins()) ?? css('--muted');
     }
     return css('--muted');
   };
@@ -554,6 +600,26 @@ function worstList(entries, title) {
     h('h3', {}, title),
     h('ol', {}, entries.map(([text, n]) =>
       h('li', {}, h('code', { style: `color:${colorOf(text)}` }, text === ' ' ? '␣' : text), h('span', {}, `${n} ${n === 1 ? 'error' : 'errors'}`)))),
+  );
+}
+
+let exploreQuery = '';
+const matches = (m) => !exploreQuery || `${m.name} ${m.commonName}`.toLowerCase().includes(exploreQuery);
+
+function renderExploreItems() {
+  const open = openCount();
+  const items = playlistMols().map((m, i) => [m, i]).filter(([m]) => matches(m));
+  $('#explore-items').replaceChildren(
+    ...(items.length ? [] : [h('p', { class: 'note' }, 'No molecule in this playlist matches.')]),
+    ...items.map(([m, i]) => {
+      const rec = store.mastery[m.id];
+      const locked = i >= open;
+      return h('button', {
+        type: 'button', class: locked ? 'locked' : '', 'aria-current': m === mol ? 'true' : null,
+        title: locked ? 'Not in the Zen/Sprint pool yet. Opens as earlier molecules reach level 2.' : null,
+        onclick: () => (startMolecule(m), renderExploreItems()),
+      }, h('span', {}, m.name), h('i', { class: `lv lv${rec?.level ?? 0}${isMastered(rec) ? ' m' : ''}`, title: rec ? `Level ${rec.level}` : 'Not played' }));
+    }),
   );
 }
 
@@ -569,19 +635,17 @@ function renderExploreList() {
       h('h2', {}, p.name),
       h('p', {}, p.description),
       h('p', { class: 'progress' }, `${passed} of ${p.molecules.length} past Copy · ${mastered} mastered${S.ramp && open < p.molecules.length ? ` · ${open} open` : ''}`)),
-    ...playlistMols().map((m, i) => {
-      const rec = store.mastery[m.id];
-      const locked = i >= open;
-      return h('button', {
-        type: 'button', class: locked ? 'locked' : '', 'aria-current': m === mol ? 'true' : null,
-        title: locked ? 'Not in the Zen/Sprint pool yet. Opens as earlier molecules reach level 2.' : null,
-        onclick: () => (startMolecule(m), renderExploreList()),
-      }, h('span', {}, m.name), h('i', { class: `lv lv${rec?.level ?? 0}${isMastered(rec) ? ' m' : ''}`, title: rec ? `Level ${rec.level}` : 'Not played' }));
+    h('input', {
+      type: 'search', id: 'explore-search', placeholder: 'Search this playlist', 'aria-label': 'Search this playlist', value: exploreQuery,
+      oninput: (ev) => ((exploreQuery = ev.target.value.trim().toLowerCase()), renderExploreItems()),
     }),
+    h('div', { id: 'explore-items' }),
   );
+  renderExploreItems();
 }
 
 function setPlaylist(id) {
+  exploreQuery = '';
   S.playlist = id;
   save(store);
   $('#playlist').value = id;
@@ -659,6 +723,24 @@ function menuContent() {
 
 // ---------------------------------------------------------------- settings
 
+function applyTheme() {
+  document.documentElement.dataset.theme = S.theme;
+  GROUPS = themed(ALL_GROUPS, S.theme);
+  viewer.setTheme({ background: css('--ink'), neutral: css('--muted'), text: css('--text') });
+  colors = fragColors();
+  viewer.setColors(colors);
+  paintName();
+  if (panel === 'settings') renderColorRows();
+  render();
+}
+
+function applyPreset(key) {
+  store.pins[S.theme] = key ? presetPins(PRESETS[key].colors, ALL_GROUPS, S.theme) : {};
+  applyColors();
+  renderColorRows();
+  say(key ? `${PRESETS[key].name} palette applied. ${PRESETS[key].note}` : 'Back to the element-convention palette.');
+}
+
 function applyColors() {
   save(store);
   colors = fragColors();
@@ -679,20 +761,27 @@ function renderSettings() {
     h('h3', {}, 'Typing'),
     check('set-autopunct', 'Type hyphens, commas, spaces and parentheses for me', 'autoPunct', () => startMolecule(mol)),
     check('set-common', 'Show the common name during Recall (level 3)', 'commonInL3'),
+    h('h3', {}, 'Molecule'),
+    h('label', { class: 'pick', for: 'set-style' }, 'Draw atoms as ',
+      h('select', { id: 'set-style', onchange: (e) => ((S.style = e.target.value), save(store), syncButtons()) },
+        [['ball', 'ball and stick'], ['space', 'spacefill'], ['wire', 'wireframe']].map(([v, label]) =>
+          h('option', { value: v, selected: S.style === v }, label)))),
     h('h3', {}, 'Motion'),
     check('set-wiggle', 'End groups spin and wag now and then (single bonds rotate)', 'wiggle', syncButtons),
     h('h3', {}, 'Playlists'),
     check('set-ramp', `Unlock a playlist in order: ${RAMP_WINDOW} molecules open, one more for each that reaches level 2`, 'ramp', () => renderExploreList()),
     h('h3', {}, 'Colors'),
-    h('p', { class: 'note' }, 'Each color belongs to a functional group. The molecule on the left updates as you pick. Blends follow their two parents until you pin a color of their own.'),
+    h('p', { class: 'note' }, `Oxygen groups are red, orange and pink; nitrogen is blue; halogens green; amide purple, as carbonyl plus amine. These are the ${S.theme}-theme colors; the molecule on the left updates as you pick.`),
+    h('div', { class: 'row' },
+      h('button', { type: 'button', onclick: () => applyPreset(null) }, 'Element colors'),
+      ...Object.entries(PRESETS).map(([key, p]) => h('button', { type: 'button', onclick: () => applyPreset(key) }, p.name))),
     h('div', { id: 'color-rows' }),
     h('label', { class: 'pick', for: 'set-vision' }, 'Check distinctness for ',
       h('select', { id: 'set-vision', onchange: renderWarnings }, VISIONS.map((v) =>
         h('option', { value: v }, { normal: 'typical vision', protan: 'protanopia', deutan: 'deuteranopia', tritan: 'tritanopia' }[v])))),
     h('div', { id: 'color-warn' }),
     h('div', { class: 'row' },
-      h('button', { type: 'button', onclick: () => ((store.pins = {}), applyColors(), renderColorRows()) }, 'Reset colors'),
-      h('button', { type: 'button', onclick: () => (($('#set-json').value = JSON.stringify({ version: 1, pins: store.pins }, null, 1)), say('Palette written to the box.')) }, 'Export'),
+      h('button', { type: 'button', onclick: () => (($('#set-json').value = JSON.stringify({ version: 1, pins: pins() }, null, 1)), say('Palette written to the box.')) }, 'Export'),
       h('button', { type: 'button', onclick: copyPalette }, 'Copy'),
       h('button', { type: 'button', onclick: importPalette }, 'Import'),
     ),
@@ -711,17 +800,17 @@ function renderColorRows() {
     ...ownColorIds(GROUPS).map((gid) => {
       const g = GROUPS[gid];
       const id = `color-${g.id}`;
-      const pinned = store.pins[g.id] != null;
+      const pinned = pins()[g.id] != null;
       return h('div', { class: 'crow', 'data-id': g.id },
         h('input', {
-          type: 'color', id, value: groupColor(g.id, GROUPS, store.pins),
-          oninput: (e) => ((store.pins[g.id] = e.target.value), applyColors(), syncColorRows()),
+          type: 'color', id, value: groupColor(g.id, GROUPS, pins()),
+          oninput: (e) => ((pins()[g.id] = e.target.value), applyColors(), syncColorRows()),
         }),
         h('label', { for: id }, g.name, g.recipe ? h('small', {}, ` ${g.recipe.map((r) => GROUPS[r].name.toLowerCase()).join(' + ')}`) : null),
         h('button', {
           type: 'button', class: 'unpin', hidden: !pinned, 'aria-label': `Reset ${g.name}`,
-          onclick: () => (delete store.pins[g.id], applyColors(), renderColorRows()),
-        }, g.recipe ? 'unpin' : 'reset'),
+          onclick: () => (delete pins()[g.id], applyColors(), renderColorRows()),
+        }, 'reset'),
       );
     }),
   );
@@ -733,16 +822,16 @@ function syncColorRows() {
   for (const row of $('#color-rows').children) {
     const id = row.dataset.id;
     const input = row.querySelector('input');
-    const value = groupColor(id, GROUPS, store.pins);
+    const value = groupColor(id, GROUPS, pins());
     if (input.value !== value && document.activeElement !== input) input.value = value;
-    row.querySelector('.unpin').hidden = store.pins[id] == null;
+    row.querySelector('.unpin').hidden = pins()[id] == null;
   }
   renderWarnings();
 }
 
 function renderWarnings() {
   const vision = $('#set-vision')?.value ?? 'normal';
-  const pairs = closePairs(GROUPS, store.pins, WARN_DELTA_E, vision);
+  const pairs = closePairs(GROUPS, pins(), WARN_DELTA_E, vision);
   const flagged = new Set(pairs.flatMap((p) => [p.a, p.b]));
   for (const row of $('#color-rows').children) row.classList.toggle('warn', flagged.has(row.dataset.id));
   $('#color-warn').replaceChildren(
@@ -755,7 +844,7 @@ function renderWarnings() {
 }
 
 async function copyPalette() {
-  const text = JSON.stringify({ version: 1, pins: store.pins }, null, 1);
+  const text = JSON.stringify({ version: 1, pins: pins() }, null, 1);
   $('#set-json').value = text;
   try {
     await navigator.clipboard.writeText(text);
@@ -768,16 +857,16 @@ async function copyPalette() {
 
 function importPalette() {
   try {
-    const { pins } = JSON.parse($('#set-json').value);
-    if (!pins || typeof pins !== 'object') throw new Error('expected {"pins": {...}}');
-    for (const [id, hex] of Object.entries(pins)) {
+    const { pins: imported } = JSON.parse($('#set-json').value);
+    if (!imported || typeof imported !== 'object') throw new Error('expected {"pins": {...}}');
+    for (const [id, hex] of Object.entries(imported)) {
       if (!GROUPS[id]) throw new Error(`unknown group "${id}"`);
       if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error(`"${hex}" is not a #rrggbb color`);
     }
-    store.pins = Object.fromEntries(Object.entries(pins).map(([k, v]) => [k, v.toLowerCase()]));
+    store.pins[S.theme] = Object.fromEntries(Object.entries(imported).map(([k, v]) => [k, v.toLowerCase()]));
     applyColors();
     renderColorRows();
-    say(`Imported ${Object.keys(pins).length} colors.`);
+    say(`Imported ${Object.keys(imported).length} colors.`);
   } catch (err) {
     say(`Could not import: ${err.message}. Paste the JSON that Export produced.`);
   }
@@ -810,18 +899,15 @@ function syncButtons() {
   pressed($('#btn-locants'), S.locants);
   pressed($('#btn-badges'), S.badges);
   pressed($('#btn-keyboard'), S.keyboard);
-  for (const b of $('#styles').children) pressed(b, b.dataset.style === S.style);
+  pressed($('#btn-legend'), S.legend);
+  pressed($('#btn-theme'), S.theme === 'light');
   viewer.setOptions({ style: S.style, locants: S.locants, badges: S.badges, wiggle: S.wiggle });
 }
 
 $('#brand').addEventListener('click', () => setMode('title'));
 $('#modes').addEventListener('click', (e) => e.target.dataset.mode && setMode(e.target.dataset.mode));
-$('#styles').addEventListener('click', (e) => {
-  if (!e.target.dataset.style) return;
-  S.style = e.target.dataset.style;
-  save(store);
-  syncButtons();
-});
+$('#btn-legend').addEventListener('click', () => ((S.legend = !S.legend), save(store), syncButtons(), render()));
+$('#btn-theme').addEventListener('click', () => ((S.theme = S.theme === 'light' ? 'dark' : 'light'), save(store), syncButtons(), applyTheme()));
 $('#btn-locants').addEventListener('click', () => ((S.locants = !S.locants), save(store), syncButtons()));
 $('#btn-badges').addEventListener('click', () => ((S.badges = !S.badges), save(store), syncButtons()));
 $('#btn-keyboard').addEventListener('click', () => ((S.keyboard = !S.keyboard), save(store), syncButtons(), render(), viewer.resize()));

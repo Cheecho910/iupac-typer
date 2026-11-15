@@ -42,7 +42,9 @@ await page.waitForTimeout(1200);
 ok((await page.locator('#name .ch.done').count()) > 0, 'the demo types by itself');
 await page.keyboard.press('Enter');
 ok(!(await page.isVisible('#title-menu')) && (await page.isVisible('#keyboard')), 'Enter starts Zen');
-ok((await page.innerText('#session')).includes('0:00'), 'demo typing is not counted in the session');
+await page.keyboard.press('Escape');
+ok(/Session\s+no runs yet/i.test(await page.innerText('#card')), 'demo typing is not counted in the session');
+await page.keyboard.press('Escape');
 await realClick('#brand');
 ok(await page.isVisible('#title-menu'), 'the wordmark returns to the title screen');
 await realClick('.tcard:nth-child(2)');
@@ -83,9 +85,10 @@ for (const [sel, check, label] of [
   ['#modes [data-mode=zen]', async () => !(await page.isVisible('#explore-list')), 'Zen'],
   ['#btn-showname', async () => (await pressed('#btn-showname')) === 'true', 'Show name on'],
   ['#btn-showname', async () => (await pressed('#btn-showname')) === 'false', 'Show name off'],
-  ['[data-style=space]', async () => (await pressed('[data-style=space]')) === 'true', 'Spacefill'],
-  ['[data-style=wire]', async () => (await pressed('[data-style=wire]')) === 'true', 'Wireframe'],
-  ['[data-style=ball]', async () => (await pressed('[data-style=ball]')) === 'true', 'Ball and stick'],
+  ['#btn-legend', async () => !(await page.isVisible('#legend')), 'Color key off'],
+  ['#btn-legend', async () => (await page.locator('#legend li').count()) === 13, 'Color key on: 13 colors'],
+  ['#btn-theme', async () => (await page.evaluate(() => document.documentElement.dataset.theme)) === 'light', 'Light theme'],
+  ['#btn-theme', async () => (await page.evaluate(() => document.documentElement.dataset.theme)) === 'dark', 'Dark theme'],
   ['#btn-locants', async () => (await pressed('#btn-locants')) === 'false', 'Locants off'],
   ['#btn-locants', async () => (await pressed('#btn-locants')) === 'true', 'Locants on'],
   ['#btn-badges', async () => (await pressed('#btn-badges')) === 'false', 'Elements off'],
@@ -100,11 +103,36 @@ for (const [sel, check, label] of [
 await realClick('#set-ramp');
 ok(!(await page.isChecked('#set-ramp')), 'click: unlock-in-order checkbox');
 await realClick('#set-ramp');
+await page.selectOption('#set-style', 'space');
+await page.selectOption('#set-style', 'ball');
+ok((await page.inputValue('#set-style')) === 'ball', 'rendering style lives in Settings');
+await realClick('text=Colorblind-safe');
+ok((await page.locator('.unpin:visible').count()) === 13, 'colorblind preset pins all 13 colors');
+await realClick('text=Element colors');
+ok((await page.locator('.unpin:visible').count()) === 0, 'element colors restores the defaults');
 await realClick('#set-vision');
 ok((await focused()) === 'set-vision', 'click: vision dropdown stays open');
 await page.keyboard.press('Escape');
 await realClick('.set-head button');
 ok(!(await page.isVisible('#settings')), 'click: Settings closes');
+
+// explore search
+await realClick('#modes [data-mode=explore]');
+await page.fill('#explore-search', 'hex');
+ok((await page.locator('#explore-items button').count()) > 0 && (await page.locator('#explore-items button').allInnerTexts()).every((t) => /hex/i.test(t)), 'explore search filters by name');
+await page.fill('#explore-search', 'zzzz');
+ok((await page.innerText('#explore-items')).includes('No molecule'), 'explore search: empty state');
+await realClick('#modes [data-mode=zen]');
+
+// finishing: session row and slip markers appear between molecules
+m = await cur();
+await page.keyboard.press('~');
+await typeName(m);
+await page.waitForTimeout(150);
+ok(await page.isVisible('#session'), 'session stats show between molecules');
+ok((await page.locator('#name .tok[data-miss]').count()) === 1, 'the fragment with the slip is marked');
+await page.keyboard.press('Enter');
+ok(!(await page.isVisible('#session')), 'and hide again while typing');
 
 // on-screen keyboard and pause menu
 m = await cur();
